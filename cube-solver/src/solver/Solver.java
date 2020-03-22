@@ -1,8 +1,12 @@
+package solver;
+
 /**
  * Class to solve a NxNxN cube
  * @author Brad Hodkinson
  */
 import java.util.*;
+
+import cube.Algorithm;
 public class Solver {
 
 	public static void main(String[] args) {

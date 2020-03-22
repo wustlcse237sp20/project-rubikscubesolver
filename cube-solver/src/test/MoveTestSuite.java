@@ -1,7 +1,11 @@
+package test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import cube.Move;
 
 class MoveTestSuite {
 	
@@ -167,33 +171,33 @@ class MoveTestSuite {
 	private void testClockwiseMove(String move, int face, int expectedLayerCount, boolean expectedInnerRotation) {
 		Move clockwiseMove = new Move(move+"");
 		System.out.println(move);
-		assertEquals(face, clockwiseMove.face);
-		assertEquals(expectedLayerCount, clockwiseMove.layerCount);
+		assertEquals(face, clockwiseMove.getFace());
+		assertEquals(expectedLayerCount, clockwiseMove.getLayerCount());
 
-		assertFalse(clockwiseMove.counterClockwise);
-		assertFalse(clockwiseMove.doubleRotation);
-		assertEquals(expectedInnerRotation, clockwiseMove.innerRotation);
+		assertFalse(clockwiseMove.isCounterClockwise());
+		assertFalse(clockwiseMove.isDoubleRotation());
+		assertEquals(expectedInnerRotation, clockwiseMove.isInnerRotation());
 		
 	}
 	
 	private void testCounterClockwiseMove(String move, int face, int expectedLayerCount, boolean expectedInnerRotation) {
 		Move counterClockwiseMove = new Move(move+"\'");
-		assertEquals(face, counterClockwiseMove.face);
-		assertEquals(expectedLayerCount, counterClockwiseMove.layerCount);
+		assertEquals(face, counterClockwiseMove.getFace());
+		assertEquals(expectedLayerCount, counterClockwiseMove.getLayerCount());
 
-		assertTrue(counterClockwiseMove.counterClockwise);
-		assertFalse(counterClockwiseMove.doubleRotation);
-		assertEquals(expectedInnerRotation, counterClockwiseMove.innerRotation);
+		assertTrue(counterClockwiseMove.isCounterClockwise());
+		assertFalse(counterClockwiseMove.isDoubleRotation());
+		assertEquals(expectedInnerRotation, counterClockwiseMove.isInnerRotation());
 
 	}
 	
 	private void testDoubleMove(String move, int face, int expectedLayerCount, boolean expectedInnerRotation) {
 		Move doubleMove = new Move(move+"2");
-		assertEquals(face, doubleMove.face);
-		assertEquals(expectedLayerCount, doubleMove.layerCount);
+		assertEquals(face, doubleMove.getFace());
+		assertEquals(expectedLayerCount, doubleMove.getLayerCount());
 
-		assertTrue(doubleMove.doubleRotation);
-		assertEquals(expectedInnerRotation, doubleMove.innerRotation);
+		assertTrue(doubleMove.isDoubleRotation());
+		assertEquals(expectedInnerRotation, doubleMove.isInnerRotation());
 
 	}
 

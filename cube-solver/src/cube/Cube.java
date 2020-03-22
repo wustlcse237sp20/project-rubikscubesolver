@@ -1,3 +1,4 @@
+package cube;
 
 /**
  * Class to a NxNxN cube
@@ -13,7 +14,6 @@ public class Cube {
 		
 	int size;
 	private Facelet[][] cube;
-	private Cuboid[][][] cubeMatrix;
 
 	/**
 	 * public constructor for creating a cube

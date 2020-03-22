@@ -1,3 +1,4 @@
+package cube;
 
 public enum Color {
     WHITE,
