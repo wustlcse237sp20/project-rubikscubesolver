@@ -153,8 +153,12 @@ public class Move {
 	public boolean isCounterClockwise() {
 		return counterClockwise;
 	}
+	
+	public boolean isMiddleRotation() {
+		return middleRotation;
+	}
 
-	public boolean isCounterCubeRotation() {
+	public boolean isCubeRotation() {
 		return cubeRotation;
 	}
 

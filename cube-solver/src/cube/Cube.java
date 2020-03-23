@@ -9,11 +9,14 @@ public class Cube {
 	//6 faces of the cube: Up, Right, Front, Down, Back, Left
 	final byte[] FACES = new byte[] {'U','R', 'F', 'D', 'L', 'B'};
 	//6 colors of the cube
-	Color[] colors = new Color[] {Color.WHITE, Color.BLUE, Color.RED, Color.YELLOW, Color.ORANGE, Color.GREEN};
+	Color[] colors = new Color[] {Color.WHITE, Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.ORANGE};
 	
 		
 	int size;
 	private Facelet[][] cube;
+	
+	boolean displayLocation = true;
+
 
 	/**
 	 * public constructor for creating a cube
@@ -30,31 +33,33 @@ public class Cube {
 		for(byte face =0; face<FACES.length; face++) {
 			for(int i=0; i<size*size; i++) {
 				String location = (char)FACES[face] + "" + (i+1);
-				cube[face][i] = new Facelet(colors[face], location);
+				cube[face][i] = new Facelet(colors[face], location, displayLocation);
 			}
 		}
-		int count =0;
-		for(Facelet f: rotateFaceCounterClockwise(0)) {
-			count++;
-			System.out.print(f);
-			System.out.print(" ");
-			if(count%3 == 0) {
-				System.out.println();
-
-			}
-		}
-		System.out.println();
-		System.out.println(isSolved());
-		int testFace = 5;
-		System.out.println((char)FACES[testFace]);
-		System.out.println((char)FACES[this.getOppositeFace(testFace)]);
 		
-		System.out.println("Adjacent Faces:");
+//		int count =0;
+//		for(Facelet f: rotateFaceCounterClockwise(0)) {
+//			count++;
+//			System.out.print(f);
+//			System.out.print(" ");
+//			if(count%3 == 0) {
+//				System.out.println();
+//
+//			}
+//		}
+//		System.out.println();
+//		System.out.println(isSolved());
+		int testFace = 5;
+//		System.out.println((char)FACES[testFace]);
+//		System.out.println((char)FACES[this.getOppositeFace(testFace)]);
+//		
+		System.out.println("Adjacent Faces of "+ (char)FACES[testFace] +":");
 		for(int face : getAdjacentFaces(testFace)){
 			System.out.print((char)FACES[face]);
 			System.out.print(" ");
 		}
 		System.out.println();
+		
 	}
 	
 	/*
@@ -76,8 +81,10 @@ public class Cube {
 	}
 	
 	public void applyAlgorithm(Algorithm algorithm) {
-		//TODO
-		
+		//for each move in the algorithm, rotate the cube accordingly
+		for(Move move: algorithm.moveList) {
+			this.rotate(move);
+		}
 	}
 	
 	/*
@@ -85,7 +92,25 @@ public class Cube {
 	 * @param move to rotate move
 	 */
 	public void rotate(Move move) {
-		//TODO
+		
+		if(move.isCubeRotation()) {
+			//TODO perform cube rotation
+		} else if(move.isInnerRotation()) {
+			//TODO
+		} else {
+			if(move.isMiddleRotation()) {
+				
+			} else {
+				if(move.counterClockwise) {
+					rotateFaceCounterClockwise(move.getFace());
+				} else {
+					System.out.println(move.getFace());
+					rotateFaceClockwise(move.getFace());
+				}
+
+			}
+		}
+
 		
 	}
 	
@@ -106,17 +131,19 @@ public class Cube {
 	 * @param face
 	 * 
 	 */
-	private Facelet[] rotateFaceClockwise(int face) {
+	private void rotateFaceClockwise(int face) {
 		Facelet[] result = new Facelet[this.size*this.size];
 		//to rotate clockwise, loop through rows and replace with reversed col 
 		for(int row=0; row<this.size; row++) {
 			Facelet[] faceletCol = getCol(face, row);
 			for(int col=0; col<this.size; col++) {
 				result[row*this.size+col] = faceletCol[this.size-col-1];
+//				cube[face][row*this.size+col] = faceletCol[this.size-col-1];
 			}
 		}
+		cube[face] = result;
 		
-		return result;
+//		return result;
 	}
 	
 	/*
@@ -136,17 +163,18 @@ public class Cube {
 	 * @param face
 	 * @return array of Facelets
 	 */
-	private Facelet[] rotateFaceCounterClockwise(int face) {
-		Facelet[] result = new Facelet[this.size*this.size];
+	private void rotateFaceCounterClockwise(int face) {
+//		Facelet[] result = new Facelet[this.size*this.size];
 		//to rotate clockwise, loop through rows and replace with reversed col 
 		for(int row=0; row<this.size; row++) {
 			Facelet[] faceletCol = getCol(face, this.size-row-1);
 			for(int col=0; col<this.size; col++) {
-				result[row*this.size+col] = faceletCol[col];
+//				result[row*this.size+col] = faceletCol[col];
+				cube[face][row*this.size+col] = faceletCol[col];
 			}
 		}
 		
-		return result;
+//		return result;
 	}
 	
 	/*
@@ -245,8 +273,8 @@ public class Cube {
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		
-		int maxDisplaySize = (this.size * this.size + "").length() + 2;
-		
+		int maxDisplaySize = displayLocation ? (this.size * this.size + "").length() + 2 : 2;
+
 		//display face 0
 		addPaddedFaceDisplay(stringBuilder, 0, maxDisplaySize);
 		

@@ -13,17 +13,21 @@ public class Solver {
 
 	public static void main(String[] args) {
 		
-		Cube cube = new Cube(2);
-		System.out.println(cube);
+//		Cube cube = new Cube(2);
+//		System.out.println(cube);
 		
 		Cube testCube = new Cube(3);
 		System.out.println(testCube);
 		
-		String moves = "U\' L D\' R2 D2 R B D\' U\' F2 R U2 B2 D2 F2 U F\' U\' F2 R\' F2 R L F\' U";
+		Move move = new Move("U");
+		testCube.rotate(move);
+		System.out.println(testCube);
+
+//		String moves = "U\' L D\' R2 D2 R B D\' U\' F2 R U2 B2 D2 F2 U F\' U\' F2 R\' F2 R L F\' U";
 		
-		Algorithm test =  new Algorithm();
-		test.generateScramble(2, 20);
-		System.out.println(test);
+//		Algorithm test =  new Algorithm();
+//		test.generateScramble(2, 20);
+//		System.out.println(test);
 		
 //		Move move = new Move("R'");
 //		System.out.println(move);
