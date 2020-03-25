@@ -17,10 +17,13 @@ public class Solver {
 //		System.out.println(cube);
 		
 		Cube testCube = new Cube(3);
+		
 		System.out.println(testCube);
 		
 		Move move = new Move("U");
 		testCube.rotate(move);
+//		Move move = new Move("D");
+//		testCube.rotate(move);
 		System.out.println(testCube);
 
 //		String moves = "U\' L D\' R2 D2 R B D\' U\' F2 R U2 B2 D2 F2 U F\' U\' F2 R\' F2 R L F\' U";
