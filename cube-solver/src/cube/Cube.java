@@ -194,7 +194,7 @@ public class Cube {
 
 				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
 					int row = 0;
-					Facelet[] nextRow = getRow(adjacentFaces[0], row);
+					Facelet[] nextRow = getRow(adjacentFaces[0], row+layer);
 
 					for(int i=0; i<adjacentFaces.length; i++){
 						//each face replace proper row or col
@@ -228,7 +228,7 @@ public class Cube {
 				//R=last row, F=last row, L=last row, B=last row
 				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
 					int row = this.size-1;
-					Facelet[] nextRow = getRow(adjacentFaces[0], row);
+					Facelet[] nextRow = getRow(adjacentFaces[0], row-layer);
 
 					for(int i=adjacentFaces.length; i>0; i--){
 
@@ -250,8 +250,71 @@ public class Cube {
 		}
 	}
 	
-	private void rotateLayersCounterClockwise(int face, int layerCount, int starLayer) {
+	private void rotateLayersCounterClockwise(int face, int layerCount, int startLayer) {
 		
+		int[] adjacentFaces = getAdjacentFaces(face);
+		
+		switch(FACES[face]){
+			case 'U':
+				//[012]
+				//R=row0, F=row0, L=row0, B=row0
+
+				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
+					int row = 0;
+					Facelet[] nextRow = getRow(adjacentFaces[0], row+layer);
+
+					for(int i=adjacentFaces.length; i>0; i--){
+						//each face replace proper row or col
+						for(int j=0; j<nextRow.length; j++) {
+							Facelet temp = this.cube[adjacentFaces[(i+3)%adjacentFaces.length]][((row+layer)*this.size)+j];
+							this.cube[adjacentFaces[(i+3)%adjacentFaces.length]][((row+layer)*this.size)+j] = nextRow[j];
+							nextRow[j] = temp;
+						}
+					}
+				}
+				
+				break;
+			case 'R':
+				//[258]		r[630]
+				//U=last col, F=last col, D=last col, B=col0
+				
+				break;
+			case 'F':
+				//[678]		[036]	[012]	[258]
+				//U=last row, R=col0, D=row0, L=last col
+				
+				break;
+			case 'L':
+				//r[630]		[258]
+				//U=col0, F=col0, D=col0, B=last col
+
+				
+				break;
+			case 'D':
+				//[012]
+				//R=last row, F=last row, L=last row, B=last row
+				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
+					int row = this.size-1;
+					Facelet[] nextRow = getRow(adjacentFaces[0], row-layer);
+
+					for(int i=0; i<adjacentFaces.length; i++){
+
+						//each face replace proper row or col
+						for(int j=0; j<nextRow.length; j++) {
+							Facelet temp = this.cube[adjacentFaces[(i+1)%adjacentFaces.length]][((row-layer)*this.size)+j];
+							this.cube[adjacentFaces[(i+1)%adjacentFaces.length]][((row-layer)*this.size)+j] = nextRow[j];
+							nextRow[j] = temp;
+						}
+					}
+				}
+
+				break;
+			case 'B':
+				//[012]		[258]		r[876]	r[630]
+				//U=row0, R=last col, D=last row, L=col 0
+				
+				break;
+		}
 	}
 	
 	/*

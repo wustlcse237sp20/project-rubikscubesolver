@@ -20,7 +20,7 @@ public class Solver {
 		
 		System.out.println(testCube);
 		
-		Move move = new Move("U");
+		Move move = new Move("E\'");
 		testCube.rotate(move);
 //		Move move = new Move("D");
 //		testCube.rotate(move);
