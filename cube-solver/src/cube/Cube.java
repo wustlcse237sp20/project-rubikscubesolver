@@ -210,6 +210,23 @@ public class Cube {
 			case 'R':
 				//[258]		r[630]
 				//U=last col, F=last col, D=last col, B=col0
+				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
+					
+					int col = this.size-1;
+					Facelet[] line = getCol(adjacentFaces[0], col-layer);
+
+					for(int i=adjacentFaces.length; i>0; i--){
+						//each face replace proper row or col
+						for(int j=0; j<line.length; j++) {
+							col = i == adjacentFaces.length ? 0+layer : this.size-1-layer;
+							int index = i == adjacentFaces.length ? ((line.length-j-1)*this.size)+col : (j*this.size)+col;
+							
+							Facelet temp = this.cube[adjacentFaces[(i+3)%adjacentFaces.length]][index];
+							this.cube[adjacentFaces[(i+3)%adjacentFaces.length]][index] = line[j];
+							line[j] = temp;
+						}
+					}
+				}
 				
 				break;
 			case 'F':
@@ -220,6 +237,24 @@ public class Cube {
 			case 'L':
 				//r[630]		[258]
 				//U=col0, F=col0, D=col0, B=last col
+				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
+					
+					int col = 0;
+					Facelet[] line = getCol(adjacentFaces[0], col+layer);
+
+					for(int i=0; i<adjacentFaces.length; i++){
+						//each face replace proper row or col
+						for(int j=0; j<line.length; j++) {
+							//Note order: U, F, D, B
+							//-2 because the BACK layer is the special case that happens D -> B
+							col = i == adjacentFaces.length-2 ? this.size-1-layer :  0+layer;
+							int index = i == adjacentFaces.length-2 ? ((line.length-j-1)*this.size)+col : (j*this.size)+col;
+							Facelet temp = this.cube[adjacentFaces[(i+1)%adjacentFaces.length]][index];
+							this.cube[adjacentFaces[(i+1)%adjacentFaces.length]][index] = line[j];
+							line[j] = temp;
+						}
+					}
+				}
 
 				
 				break;
