@@ -155,16 +155,15 @@ public class Cube {
 	 * @return array of Facelets
 	 */
 	private void rotateFaceCounterClockwise(int face) {
-//		Facelet[] result = new Facelet[this.size*this.size];
+		Facelet[] result = new Facelet[this.size*this.size];
 		//to rotate clockwise, loop through rows and replace with reversed col 
 		for(int row=0; row<this.size; row++) {
 			Facelet[] faceletCol = getCol(face, this.size-row-1);
 			for(int col=0; col<this.size; col++) {
-//				result[row*this.size+col] = faceletCol[col];
-				cube[face][row*this.size+col] = faceletCol[col];
+				result[row*this.size+col] = faceletCol[col];
 			}
 		}
-		
+		cube[face] = result;
 //		return result;
 	}
 	
@@ -265,7 +264,7 @@ public class Cube {
 					int row = this.size-1;
 					Facelet[] nextRow = getRow(adjacentFaces[0], row-layer);
 
-					for(int i=adjacentFaces.length; i>0; i--){
+					for(int i=0; i<adjacentFaces.length; i++){
 
 						//each face replace proper row or col
 						for(int j=0; j<nextRow.length; j++) {
@@ -288,6 +287,13 @@ public class Cube {
 	private void rotateLayersCounterClockwise(int face, int layerCount, int startLayer) {
 		
 		int[] adjacentFaces = getAdjacentFaces(face);
+		
+		System.out.print("Move: "+FACES[face]);
+		System.out.println();
+		for(int f: adjacentFaces) {
+			System.out.print(FACES[f] + " ");
+		}
+		System.out.println();
 		
 		switch(FACES[face]){
 			case 'U':
@@ -312,7 +318,23 @@ public class Cube {
 			case 'R':
 				//[258]		r[630]
 				//U=last col, F=last col, D=last col, B=col0
-				
+				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
+					
+					int col = this.size-1;
+					Facelet[] line = getCol(adjacentFaces[0], col-layer);
+
+					for(int i=0; i<adjacentFaces.length; i++){
+						//each face replace proper row or col
+						for(int j=0; j<line.length; j++) {
+							col = i == adjacentFaces.length-2 ? 0+layer : this.size-1-layer;
+							int index = i == adjacentFaces.length-2 ? ((line.length-j-1)*this.size)+col : (j*this.size)+col;
+							
+							Facelet temp = this.cube[adjacentFaces[(i+1)%adjacentFaces.length]][index];
+							this.cube[adjacentFaces[(i+1)%adjacentFaces.length]][index] = line[j];
+							line[j] = temp;
+						}
+					}
+				}
 				break;
 			case 'F':
 				//[678]		[036]	[012]	[258]
@@ -322,7 +344,24 @@ public class Cube {
 			case 'L':
 				//r[630]		[258]
 				//U=col0, F=col0, D=col0, B=last col
+				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
+					
+					int col = 0;
+					Facelet[] line = getCol(adjacentFaces[0], col+layer);
 
+					for(int i=adjacentFaces.length; i>0; i--){
+						//each face replace proper row or col
+						for(int j=0; j<line.length; j++) {
+							//Note order: U, F, D, B
+							//-2 because the BACK layer is the special case that happens D -> B
+							col = i == adjacentFaces.length ? this.size-1-layer :  0+layer;
+							int index = i == adjacentFaces.length ? ((line.length-j-1)*this.size)+col : (j*this.size)+col;
+							Facelet temp = this.cube[adjacentFaces[(i+3)%adjacentFaces.length]][index];
+							this.cube[adjacentFaces[(i+3)%adjacentFaces.length]][index] = line[j];
+							line[j] = temp;
+						}
+					}
+				}
 				
 				break;
 			case 'D':
