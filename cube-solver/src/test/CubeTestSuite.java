@@ -34,7 +34,8 @@ class CubeTestSuite {
 	@Test
 	void isSolvedTest() {
 		//test cube
-//		cube.rotate(Move.LEFT);
+		
+//		cube.rotate();
 		assertFalse(cube.isSolved());
 //		cube.rotate(Move.LEFT_PRIME);
 		assertTrue(cube.isSolved());

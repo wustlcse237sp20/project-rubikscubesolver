@@ -380,6 +380,27 @@ public class Cube {
 				//[678]		[036]	[012]	[258]
 				//U=last row, R=col0, D=row0, L=last col
 				//TODO Front Counter-Clockwise
+				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
+					
+					//[R9 R6 R3] [D9 D8 D7] [L7 L4 L1] [U1 U2 U3]
+					int lineIndex =  this.size-1;
+					Facelet[] line = getRow(adjacentFaces[0], lineIndex-layer);
+
+					for(int i=adjacentFaces.length; i>0; i--){
+						//each face replace proper row or col
+						for(int j=0; j<line.length; j++) {
+							//get last row/col of the last two layers
+							lineIndex = (i == 2 || i == 3) ? 0+layer : this.size-1-layer;
+							//reverse the order of  the last two layers
+							int k = (i == 1 || i == 2) ? j : (this.size-j-1);
+							int index = i%2 == 0 ? (k*this.size)+lineIndex : (lineIndex*this.size)+k;
+
+							Facelet temp = this.cube[adjacentFaces[(i+3)%adjacentFaces.length]][index];
+							this.cube[adjacentFaces[(i+3)%adjacentFaces.length]][index] = line[j];
+							line[j] = temp;
+						}
+					}
+				}
 				
 				break;
 			case 'L':
