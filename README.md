@@ -4,13 +4,30 @@ Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 
 ## Iteration 1
 **User stories completed this iteration:**
-* Create facelet class
-* 
-
-
+* Create facelet class. Facelet is a face of a cuboid, it represents both a location and a color.
+* applyMove implemented. Move being any notation as defined by the World Cubing Association. For more info on this please visit the WCA website and check Article 12 Section A, link can be found here: https://www.worldcubeassociation.org/regulations/#article-12-notation
+* isSolved method implemented. Checks if the rubik’s cube is solved by checking if all the colors are the same on each face of the cube.
+* toString method implemented. Draws out the rubik’s cube on the terminal.
+* Move class implemented. Move just represents standard notation as defined by the WCA.
+* Algorithm class implemented. Algorithm is a list of moves and can represent a scramble or a solution to the cube.
+* cube class implemented, cube is the heart of the project it represents an NxNxN cube and can have moves and algorithms be applied to it in order to perform a series of transformations.
+* Test for cube 
+* Test for move
+ 
+ 
+ 
 **User stories to complete next iteration:**
-
+* Implement a basic solving algorithm
+* Create a GUI that displays a 2D representation of the cube, has a scramble button, has a way to select which algorithm to use, has a solve button, prints the moves to solve the cube.
+* Research and implement a more complex solving algorithm
+* Create key mappings to allow the user to perform moves on the cube
+* Finish move test cases
+ 
+ 
 **Is there anything that you implemented but doesn't currently work?**
+* N/A
+
+
 
 
 
