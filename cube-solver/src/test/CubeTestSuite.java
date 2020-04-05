@@ -2,10 +2,15 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import cube.Algorithm;
 import cube.Cube;
+import cube.Facelet;
+import cube.Move;
 
 
 /**
@@ -13,63 +18,93 @@ import cube.Cube;
  * @author Brad Hodkinson
  */
 class CubeTestSuite {
-	
-	Cube cube;
+	Cube oddCube;
+	Cube evenCube;
+	Cube normalCube;
 	Cube smallCube ;
+	String[][] normalCubeExpectedFaces;
+	final String FACES = "URFDLB";
 
 	@BeforeEach
 	void setUp() throws Exception {
-		cube = new Cube(3);
+		oddCube = new Cube(5);
+		evenCube = new Cube(4);
+		normalCube = new Cube(3);
 		smallCube = new Cube(2);
+		normalCubeExpectedFaces = getExpectedFaceLocations(normalCube.getSize());
+		
+		
+	}
+	
+	private String[][] getExpectedFaceLocations(int cubeSize){
+		String[][] expectedFaceLocations = new String[FACES.length()][cubeSize*cubeSize];
+		for(int face=0; face<FACES.length(); face++) {
+			for(int index=0; index<cubeSize*cubeSize; index++) {
+				expectedFaceLocations[face][index] = FACES.charAt(face)+""+(index+1);
+			}
+		}
+		return expectedFaceLocations;
 
+	}
+	
+	private String[] getActualFaceLocations(Cube cube, int face) {
+		String[] expectedFaceLocations = new String[cube.getSize()*cube.getSize()];
+		Facelet[] cubeFace = cube.getFace(face);
+		for(int i=0; i<cubeFace.length; i++) {
+			expectedFaceLocations[i] = cubeFace[i].getLocation();
+		}
+		return expectedFaceLocations;
 	}
 
 	@Test
 	void preliminaryIsSolvedTest() {
 		//cube should in solved position by default
-		assertTrue(cube.isSolved());
+		assertTrue(normalCube.isSolved());
 		assertTrue(smallCube.isSolved());
 	}
 	
 	@Test
 	void isSolvedTest() {
-		//test cube
+		Algorithm cornerRotation = new Algorithm("R\' D\' R D ");
 		
-//		cube.rotate();
-		assertFalse(cube.isSolved());
-//		cube.rotate(Move.LEFT_PRIME);
-		assertTrue(cube.isSolved());
+		normalCube.applyAlgorithm(cornerRotation);
+		assertFalse(normalCube.isSolved());
 		
-		//test small cube
-//		smallCube.rotate(Move.RIGHT);
-		assertFalse(cube.isSolved());
-//		smallCube.rotate(Move.RIGHT_PRIME);
+		for(int i=0; i<5; i++) {
+			normalCube.applyAlgorithm(cornerRotation);
+		}
+		assertTrue(normalCube.isSolved());
+		
+		smallCube.applyAlgorithm(cornerRotation);
+		assertFalse(smallCube.isSolved());
+		
+		for(int i=0; i<5; i++) {
+			smallCube.applyAlgorithm(cornerRotation);
+		}
+
 		assertTrue(smallCube.isSolved());
 
 	}
 	
 	@Test
-	void preliminaryMoveTest() {
-		fail("Test not yet implemented");
-	}
-	
-	@Test
-	void moveTest() {
-		fail("Test not yet implemented");
-	}
-	
-	@Test
 	void moveLeftTest() {
-//		smallCube.rotate(Move.LEFT);
-//		assertEquals();
-		fail("Test not yet implemented");
-//		cube.rotate(Move.LEFT);
+		Move move = new Move("L");
 
+		normalCube.rotate(move);
+	
+		//get the opposite face
+		int untouchedFace = (FACES.indexOf("L") + 3)%6;
+		assertEquals(Arrays.toString(normalCubeExpectedFaces[untouchedFace]), Arrays.toString(normalCube.getFace(untouchedFace)));
+
+		//TODO check left face
+		
+		//TODO check each row of other faces
+		
 		
 	}
+	
 	@Test
 	void moveLeftPrimeTest() {
-		
 		
 	}
 	@Test

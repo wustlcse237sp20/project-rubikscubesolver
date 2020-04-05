@@ -57,6 +57,10 @@ public class Cube {
 		return true;
 	}
 	
+	public int getSize() {
+		return this.size;
+	}
+	
 	public void applyAlgorithm(Algorithm algorithm) {
 		//for each move in the algorithm, rotate the cube accordingly
 		for(Move move: algorithm.moveList) {
@@ -177,15 +181,15 @@ public class Cube {
 	}
 	
 	private void rotateLayersClockwise(int face, int layerCount, int startLayer) {
-
-		System.out.print("Move: "+FACES[face]);
-		System.out.println();
-
+		
 		int[] adjacentFaces = getAdjacentFaces(face);
-		for(int f: adjacentFaces) {
-			System.out.print(FACES[f] + " ");
-		}
-		System.out.println();
+
+//		System.out.print("Move: "+FACES[face]);
+//		System.out.println();
+//		for(int f: adjacentFaces) {
+//			System.out.print(FACES[f] + " ");
+//		}
+//		System.out.println();
 		switch(FACES[face]){
 			case 'U':
 				//[012]
@@ -284,7 +288,7 @@ public class Cube {
 					int row = this.size-1;
 					Facelet[] nextRow = getRow(adjacentFaces[0], row-layer);
 
-					for(int i=0; i<adjacentFaces.length; i++){
+					for(int i=adjacentFaces.length; i>0; i--){
 
 						//each face replace proper row or col
 						for(int j=0; j<nextRow.length; j++) {
@@ -328,12 +332,12 @@ public class Cube {
 		
 		int[] adjacentFaces = getAdjacentFaces(face);
 		
-		System.out.print("Move: "+FACES[face]);
-		System.out.println();
-		for(int f: adjacentFaces) {
-			System.out.print(FACES[f] + " ");
-		}
-		System.out.println();
+//		System.out.print("Move: "+FACES[face]);
+//		System.out.println();
+//		for(int f: adjacentFaces) {
+//			System.out.print(FACES[f] + " ");
+//		}
+//		System.out.println();
 		
 		switch(FACES[face]){
 			case 'U':
