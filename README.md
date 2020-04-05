@@ -2,6 +2,20 @@
 
 Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 
+## Iteration 1
+**User stories completed this iteration:**
+* Create facelet class
+* 
+
+
+**User stories to complete next iteration:**
+
+**Is there anything that you implemented but doesn't currently work?**
+
+
+
+
+
 ## Project Summary
 The goal of this project is to design and implement a Rubik's Cube solver for multiple sided cubes (not only including the usual 3x3 sized cube). The project will not only include the algorithm written to solve the cube, but also show the Rubik Cube in a 2d fashion. Additionally, one of the main goals of this project should be properly practicing the elements of clean code.
 
