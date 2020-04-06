@@ -2,6 +2,9 @@
 
 Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 
+## Usage
+To use the program run the CubeExplorer.java file located in src/viz/ folder. We used eclipse for this project so feel free to import into eclipse or your IDE of choice.
+
 ## Iteration 1
 **Usage**
 1. Clone repo
