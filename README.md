@@ -3,6 +3,12 @@
 Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 
 ## Iteration 1
+**Usage**
+1. Clone repo
+2. Run cube-solver/src/viz/CubeExplorer.java 
+3. Follow usage message in console
+
+
 **User stories completed this iteration:**
 * Create facelet class. Facelet is a face of a cuboid, it represents both a location and a color.
 * applyMove implemented. Move being any notation as defined by the World Cubing Association. For more info on this please visit the WCA website and check Article 12 Section A, link can be found here: https://www.worldcubeassociation.org/regulations/#article-12-notation
@@ -13,7 +19,7 @@ Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 * cube class implemented, cube is the heart of the project it represents an NxNxN cube and can have moves and algorithms be applied to it in order to perform a series of transformations.
 * Test for cube 
 * Test for move
- 
+* Created cube explorer class. Allows the user to interact with the cube through the terminal.
  
  
 **User stories to complete next iteration:**
