@@ -13,23 +13,23 @@ public class Move {
 
 	final String FACES = "URFDLB";
 
-	final String FACE_TURN_NOTATION = "^([UDRLFB])([2']?)$";
-	final String MIDDLE_TURN_NOTATION = "^([MES])([2']?)$";
-	final String CUBE_ROTATION_NOTATION = "^([xyz])([2']?)$";
-	final String INNER_SLICE_NOTATION = "^([udrlfb])([2']?)$";
-	final String WIDE_TURN_NOTATION = "^([\\d]*)([UDRLFB])[w]([2']?)$";
+	final static String FACE_TURN_NOTATION = "^([UDRLFB])([2']?)$";
+	final static String MIDDLE_TURN_NOTATION = "^([MES])([2']?)$";
+	final static String CUBE_ROTATION_NOTATION = "^([xyz])([2']?)$";
+	final static String INNER_SLICE_NOTATION = "^([udrlfb])([2']?)$";
+	final static String WIDE_TURN_NOTATION = "^([\\d]*)([UDRLFB])[w]([2']?)$";
 
 	String move;
 
 	int face;
 
-	boolean innerRotation;
+	static boolean innerRotation;
 	boolean doubleRotation;
 	boolean counterClockwise;
 	boolean cubeRotation;
 	boolean middleRotation;
 
-	int layerCount;
+	static int layerCount;
 
 	public Move(String move) {
 		// Remove leading and trailing spaces
@@ -193,7 +193,7 @@ public class Move {
 	 * @param cubeSize to check if the move is possible given the cube size
 	 * @return true if move is valid, else false
 	 */
-	public boolean isValidMove(String move, int cubeSize) {
+	public static boolean isValidMove(String move, int cubeSize) {
 		//can't turn more layers than the size of the cube
 		if(layerCount > cubeSize) {
 			return false;

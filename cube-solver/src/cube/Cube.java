@@ -15,7 +15,7 @@ public class Cube {
 	int size;
 	private Facelet[][] cube;
 	
-	boolean displayLocation = true;
+	boolean displayLocation = false;
 
 
 	/**
@@ -76,20 +76,51 @@ public class Cube {
 		
 		if(move.isCubeRotation()) {
 			//TODO perform cube rotation
-			System.out.println("Cube Rotation");
+			if(move.counterClockwise) {
+				rotateCubeCounterClockwise(move.getFace());
+				if(move.isDoubleRotation()) {
+					rotateCubeCounterClockwise(move.getFace());
+
+				}
+			} else {
+				rotateCubeClockwise(move.getFace());
+
+				if(move.isDoubleRotation()) {
+					rotateCubeClockwise(move.getFace());
+
+				}
+			}
 		} else if(move.isInnerRotation()) {
-			System.out.println("Inner Rotation");
 			if(move.isMiddleRotation()) {
-				System.out.println("Middle Move Face: "+move.getFace());
 				int middleLayer = this.size/2;
-				System.out.println("Middle Layer:" + middleLayer);
 				if(move.counterClockwise) {
 					rotateLayersCounterClockwise(move.getFace(), move.getLayerCount(), middleLayer);
+					if(move.isDoubleRotation()) {
+						rotateLayersCounterClockwise(move.getFace(), move.getLayerCount(), middleLayer);
+					}
 				} else {
 					rotateLayersClockwise(move.getFace(), move.getLayerCount(), middleLayer);
+					if(move.isDoubleRotation()) {
+						rotateLayersClockwise(move.getFace(), move.getLayerCount(), middleLayer);
+
+					}
 					
 				}
-			} 
+			} else {
+				if(move.counterClockwise) {
+					rotateLayersCounterClockwise(move.getFace(), move.getLayerCount(), 1);
+					if(move.isDoubleRotation()) {
+						rotateLayersCounterClockwise(move.getFace(), move.getLayerCount(), 1);
+					}
+				} else {
+					rotateLayersClockwise(move.getFace(), move.getLayerCount(), 1);
+					if(move.isDoubleRotation()) {
+						rotateLayersClockwise(move.getFace(), move.getLayerCount(), 1);
+	
+					}
+					
+				}
+			}
 		
 
 		} else {
@@ -97,17 +128,28 @@ public class Cube {
 			if(move.counterClockwise) {
 				rotateFaceCounterClockwise(move.getFace());
 				rotateLayersCounterClockwise(move.getFace(), move.getLayerCount(), 0);
+				if(move.isDoubleRotation()) {
+					rotateFaceCounterClockwise(move.getFace());
+					rotateLayersCounterClockwise(move.getFace(), move.getLayerCount(), 0);
+				}
+				
 			} else {
 				rotateFaceClockwise(move.getFace());
 				rotateLayersClockwise(move.getFace(), move.getLayerCount(), 0);
+				if(move.isDoubleRotation()) {
+					rotateFaceClockwise(move.getFace());
+					rotateLayersClockwise(move.getFace(), move.getLayerCount(), 0);
+				}
 				
 			}
+			
 
 			
 		}
 
 		
 	}
+	
 	
 	/*
 	 * 	Rotate the face clockwise. The given face:
@@ -475,6 +517,20 @@ public class Cube {
 				}
 				break;
 		}
+	}
+	
+	private void rotateCubeClockwise(int face) {
+		rotateFaceClockwise(face);
+		rotateFaceCounterClockwise(getOppositeFace(face));
+		rotateLayersClockwise(face, this.size, 0);
+
+	}
+	
+	private void rotateCubeCounterClockwise(int face) {
+		rotateFaceCounterClockwise(face);
+		rotateFaceClockwise(getOppositeFace(face));
+		rotateLayersCounterClockwise(face, this.size, 0);
+
 	}
 	
 	/*

@@ -34,8 +34,8 @@ public class CubeExplorer {
 		System.out.println("Enter valid notation to twist the cube. Notation listed below:");
 		String[] faces = new String[]{"up", "right", "front", "down", "left", "back"};
 		for(String face: faces) {
-			System.out.print(face.charAt(0) + " - rotate " + face + " face clockwise\t\t");
-			System.out.println(face.toUpperCase().charAt(0) + " - rotate " + face + " face counter-clockwise");
+			System.out.print(face.toUpperCase().charAt(0) + " - rotate " + face + " face clockwise\t\t");
+			System.out.println(face.toUpperCase().charAt(0) + "\' - rotate " + face + " face counter-clockwise");
 		}
 		System.out.println();
 	}
@@ -46,7 +46,7 @@ public class CubeExplorer {
 		String input = "";
 		boolean validInput = false;
 		while(!validInput) {
-			System.out.println("Enter a cube size: ");
+			System.out.print("Enter a cube size: ");
 			input = keyBoard.nextLine();
 			validInput = isValidCubeSize(input);
 			if(!validInput) {
@@ -60,8 +60,14 @@ public class CubeExplorer {
 	
 	
 	private static boolean isValidCubeSize(String input) {
-		int cubeSize = Integer.parseInt(input);			
-		return cubeSize >= 1 || cubeSize <= 17;
+		System.out.println(input);
+		try {
+			int cubeSize = Integer.parseInt(input);	
+			return cubeSize >= 1 || cubeSize <= 17;
+
+		} catch (NumberFormatException ex) {
+			return  false;
+		}
 	}
 	
 	
@@ -69,9 +75,9 @@ public class CubeExplorer {
 	private static Cube scrambleCube(Cube cube) {
 		int cubeSize = cube.getSize();
 		int scrambleLength = 20;
-		Algorithm algo = new Algorithm();
-		algo.generateScramble(cubeSize, scrambleLength);
-		cube.applyAlgorithm(algo);
+		Algorithm scramble = new Algorithm();
+		scramble.generateScramble(cubeSize, scrambleLength);
+		cube.applyAlgorithm(scramble);
 		return cube;
 	}
 	
@@ -110,7 +116,7 @@ public class CubeExplorer {
 			}
 			
 			else {
-				boolean isValidMove = isValidMove(input);
+				boolean isValidMove = Move.isValidMove(input, cube.getSize());
 				if(isValidMove) {
 					cube.rotate(new Move(input));
 					cubeChanged = true;
@@ -131,7 +137,6 @@ public class CubeExplorer {
 	
 	
 	public static boolean didSolve(Cube cube, boolean cubeChanged) {
-		System.out.println(cubeChanged);
 		if(cubeChanged) {
 			if(cube.isSolved()) {
 				System.out.println("CONGRATS, YOU SOLVED THE CUBE");
@@ -142,17 +147,6 @@ public class CubeExplorer {
 	}
 	
 	
-	
-	public static boolean isValidMove(String move) {
-		String FACE_TURN_NOTATION = "^([UDRLFB])([2']?)$";
-		String MIDDLE_TURN_NOTATION = "^([MES])([2']?)$";
-		String CUBE_ROTATION_NOTATION = "^([xyz])([2']?)$";
-		String INNER_SLICE_NOTATION = "^([udrlfb])([2']?)$";
-		String WIDE_TURN_NOTATION = "^([\\d]*)([UDRLFB])[w]([2']?)$";
-		return move.matches(FACE_TURN_NOTATION) | move.matches(MIDDLE_TURN_NOTATION)
-				| move.matches(CUBE_ROTATION_NOTATION) | move.matches(INNER_SLICE_NOTATION)
-				| move.matches(WIDE_TURN_NOTATION);
-	}
 	
 
 }
