@@ -39,6 +39,31 @@ public class Cube {
 		
 	}
 	
+	/**
+	 * Public deep copy constructor
+	 * @param a cube to copy
+	 */
+	public Cube(Cube toCopy) {
+		this.size = toCopy.size;
+		this.displayLocation = toCopy.displayLocation;	
+		this.cube = new Facelet[6][9];
+		for(int faceInt = 0; faceInt < 6; ++faceInt) {
+			for(int faceletInt = 0; faceletInt < 9; ++faceletInt) {
+				this.cube[faceInt][faceletInt] = new Facelet(toCopy.cube[faceInt][faceletInt]);
+			}
+		}
+	}
+	
+//	protected Object clone() throws CloneNotSupportedException {
+//	    Cube cloned = (Cube)super.clone();
+//	    cloned.setFacelets((Facelet)cloned.getFacelets().clone());   
+//	    return cloned;
+//	}
+	
+	
+	
+	
+	
 	/*
 	 * Method to check if the cube is solved
 	 * @return true if the cube is solved, else false
@@ -211,6 +236,10 @@ public class Cube {
 		}
 		cube[face] = result;
 //		return result;
+	}
+	
+	public Facelet[][] getFacelets() {
+		return this.cube;
 	}
 	
 	/*
