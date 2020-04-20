@@ -1,22 +1,31 @@
 package viz;
 
 import java.util.*;
-
+import javafx.*;
+import javafx.application.*;
+import javafx.stage.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.event.*;
 import cube.Algorithm;
 import cube.Cube;
 import cube.Move;
 
-public class CubeExplorer {
+public class CubeExplorer extends Application {
 
 	public static void main(String[] args) {
+		System.out.println("Starting");
+		launch(args);
+		System.out.println("Finishing");
 		
-		Scanner keyBoard = new Scanner(System.in);
-		int cubeSize = getUsersCubeSize(keyBoard);
-		
-		Cube cube = new Cube(cubeSize);
-		displayCubeUsageMessage();
-		System.out.println(cube);
-		startExplorer(cube);
+//		Scanner keyBoard = new Scanner(System.in);
+//		int cubeSize = getUsersCubeSize(keyBoard);
+//		
+//		Cube cube = new Cube(cubeSize);
+//		displayCubeUsageMessage();
+//		System.out.println(cube);
+//		startExplorer(cube);
 
 	}
 
@@ -145,6 +154,27 @@ public class CubeExplorer {
 		}
 		return cubeChanged;
 	}
+
+
+
+	 @Override
+	    public void start(Stage primaryStage) {
+	        primaryStage.setTitle("Hello World!");
+	        Button btn = new Button();
+	        btn.setText("Say 'Hello World'");
+	        btn.setOnAction(new EventHandler<ActionEvent>() {
+	 
+	            @Override
+	            public void handle(ActionEvent event) {
+	                System.out.println("Hello World!");
+	            }
+	        });
+	        
+	        StackPane root = new StackPane();
+	        root.getChildren().add(btn);
+	        primaryStage.setScene(new Scene(root, 300, 250));
+	        primaryStage.show();
+	    }
 	
 	
 	
