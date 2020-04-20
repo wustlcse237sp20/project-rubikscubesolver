@@ -15,13 +15,14 @@ public class Min2Phase {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Cube cube = new Cube(3);
 		
+
 		long startTime = System.nanoTime();
 		
 		for(int x = 1; x <= 100; ++x) {
 			//Scramble Cube
-			Algorithm scramble = generateScramble(2);
+			Cube cube = new Cube(3);
+			Algorithm scramble = generateScramble(5);
 			cube.applyAlgorithm(scramble);
 			System.out.println(cube);
 			Min2PhaseSolver(cube);
