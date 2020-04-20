@@ -12,6 +12,12 @@ public class Facelet {
 		this.displayLocation = displayLocation;
 	}
 	
+	public Facelet(Facelet facelet) {
+		this.color = facelet.color;
+		this.location = facelet.location;
+		this.displayLocation = facelet.displayLocation;
+	}
+	
 	public Color getColor() {
 		return color;
 	}

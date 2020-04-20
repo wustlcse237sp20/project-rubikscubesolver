@@ -33,6 +33,21 @@ public class Algorithm {
 		this.moveList = moveList;
 	}
 	
+	public Algorithm(Algorithm toCopy) {
+		this.moveList = new LinkedList<Move>();
+		for(Move m : toCopy.moveList) {
+			this.moveList.add(new Move(m.toString()));
+		}
+	}
+	
+	public List<Move> getMoveList(){
+		return this.moveList;
+	}
+	
+	public void addToMoveList(Move m) {
+		this.moveList.add(m);
+	}
+	
 	public void generateScramble(int cubeSize, int scrambleLength) {
 		for(int i=0; i<scrambleLength; i++) {
 			//make sure next move is different face then the last move
@@ -56,7 +71,7 @@ public class Algorithm {
 	}
 	
 	// generate random move
-	private Move generateRandomMove(int cubeSize) {
+	public Move generateRandomMove(int cubeSize) {
 		Random random = new Random();
 		String move = null;
 		if(cubeSize<1) {
@@ -171,7 +186,6 @@ public class Algorithm {
 		// Generate random integers in range 0 to 999
 		return postfixNotaionList[random.nextInt(postfixNotaionList.length)];
 	}
-	
 	
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
