@@ -5,24 +5,18 @@ Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 ## Usage
 To use the program run the CubeExplorer.java file located in src/viz/ folder. We used eclipse for this project so feel free to import into eclipse or your IDE of choice.
 
-## Iteration 1
+## Iteration 2
 **Usage**
 1. Clone repo
-2. Run cube-solver/src/viz/CubeExplorer.java 
-3. Follow usage message in console
+2. CD to cube-solver/src
+3. "javac viz/CubeExplorer.java"
+4. "java viz.CubeExplorer"
+5. Follow the steps
 
 
 **User stories completed this iteration:**
-* Create facelet class. Facelet is a face of a cuboid, it represents both a location and a color.
-* applyMove implemented. Move being any notation as defined by the World Cubing Association. For more info on this please visit the WCA website and check Article 12 Section A, link can be found here: https://www.worldcubeassociation.org/regulations/#article-12-notation
-* isSolved method implemented. Checks if the rubik’s cube is solved by checking if all the colors are the same on each face of the cube.
-* toString method implemented. Draws out the rubik’s cube on the terminal.
-* Move class implemented. Move just represents standard notation as defined by the WCA.
-* Algorithm class implemented. Algorithm is a list of moves and can represent a scramble or a solution to the cube.
-* cube class implemented, cube is the heart of the project it represents an NxNxN cube and can have moves and algorithms be applied to it in order to perform a series of transformations.
-* Test for cube 
-* Test for move
-* Created cube explorer class. Allows the user to interact with the cube through the terminal.
+* Created GUI board
+* Added buttons and labels in GUI board
  
  
 **User stories to complete next iteration:**
@@ -34,7 +28,7 @@ To use the program run the CubeExplorer.java file located in src/viz/ folder. We
  
  
 **Is there anything that you implemented but doesn't currently work?**
-* N/A
+* GUI being worked on
 
 
 
