@@ -17,6 +17,8 @@ To use the program run the CubeExplorer.java file located in src/viz/ folder. We
 **User stories completed this iteration:**
 * Created GUI board
 * Added buttons and labels in GUI board
+* Reasarched Min2Phase Algorithm
+* Began implementing Min2Phase Algorithm
  
  
 **User stories to complete next iteration:**
