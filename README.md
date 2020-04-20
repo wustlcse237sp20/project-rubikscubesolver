@@ -18,13 +18,12 @@ To use the program run the CubeExplorer.java file located in src/viz/ folder. We
 * Created GUI board
 * Added buttons and labels in GUI board
 * Reasarched Min2Phase Algorithm
-* Began implementing Min2Phase Algorithm
+* Implemented a basic Min2Phase algorithm
  
  
 **User stories to complete next iteration:**
-* Implement a basic solving algorithm
 * Create a GUI that displays a 2D representation of the cube, has a scramble button, has a way to select which algorithm to use, has a solve button, prints the moves to solve the cube.
-* Research and implement a more complex solving algorithm
+* Improve Min2Phase algorithm
 * Create key mappings to allow the user to perform moves on the cube
 * Finish move test cases
  
