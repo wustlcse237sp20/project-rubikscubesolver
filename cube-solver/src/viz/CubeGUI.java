@@ -1,54 +1,84 @@
 package viz;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+import javax.swing.*;
 
-public class CubeGUI implements ActionListener{
+public class CubeGUI extends JFrame{
 	
-	private JFrame frame;
-	private JPanel panel;
-	private JLabel label; 
+	private JButton scrambleButton;
+	private JButton solveButton;
+	private JPanel upperPanel;
+	private Choice sizeChoice;
+	
 	
 	
 	public CubeGUI() {
-		frame = new JFrame();
-		
-		JButton button = new JButton("Click me");
-		button.addActionListener(this);
-		button.setBounds(50, 100, 50, 100);
-		
-		
-		label = new JLabel("Clicks");
-		
-		panel = new JPanel();
-		panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,10));
-		panel.setLayout(new GridLayout());
-		panel.add(button);
-		panel.add(label);
-		
-		frame.setSize(400, 1000);
-		frame.add(panel, BorderLayout.CENTER);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Cube Solver");
-		frame.pack();
-		frame.setVisible(true);
+	    super(" Rubik's Cube GUI ");
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setLayout(new BorderLayout());
+	    
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        
+        scrambleButton = new JButton(" Scramble ");
+        solveButton = new JButton(" Solve ");
+        
+        upperPanel = new JPanel();
+    	upperPanel.setLayout(new BorderLayout());
+    	
+    	
+    	//add option for game bored size
+    	sizeChoice = new Choice();
+    	sizeChoice.add(" 2 x 2 ");
+    	sizeChoice.add(" 3 x 3 ");
+    	sizeChoice.add(" 4 x 4 ");
+    	sizeChoice.add(" 5 x 5 ");
+    	sizeChoice.add(" 6 x 6 ");
+    	sizeChoice.add(" 7 x 7 ");
+    	
+    	upperPanel.add(sizeChoice, BorderLayout.NORTH);
+    	upperPanel.add(scrambleButton, BorderLayout.CENTER);
+    	upperPanel.add(solveButton, BorderLayout.SOUTH);
+
+    	//add action listeners 
+    	scrambleButton.addActionListener(new scrambleButtonListener());
+    	solveButton.addActionListener(new solveButtonListener());
+ 
+        
+        
+    	// Add the panel to this JFrame
+    	mainPanel.add(upperPanel, BorderLayout.NORTH);
+        this.add(mainPanel);
+
+        // Size this JFrame 
+        this.setSize(800,400);
+       
+        // Make this JFrame visible
+        this.setVisible(true);
 	}
+	
+	private class scrambleButtonListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+        	System.out.println("Scramble");
+        }
+    }
+	
+	private class solveButtonListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+        	System.out.println("Solve");
+        }
+    }
 
 	public static void main(String[] args) {
 		new CubeGUI();
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		System.out.println("Clicked");
-		
-	}
+	
+	
 }
+
