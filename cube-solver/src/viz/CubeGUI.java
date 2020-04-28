@@ -1,20 +1,35 @@
 package viz;
 
-
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
 import javax.swing.*;
+import java.net.URL;
+
 import viz.*;
 
 public class CubeGUI extends JFrame{
 
 	public CubeGUI() {
-	    super(" Rubik's Cube GUI ");
+	    super(" Rubik's Cube Explorer ");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setLayout(new BorderLayout());
-	    
+		this.setLayout(new BorderLayout());
+		
+        //Set GUI dock icon
+        try {
+			final Toolkit toolkit = Toolkit.getDefaultToolkit();
+			final URL imageUrl = this.getClass().getClassLoader().getResource("cube.png");
+			final Image icon = toolkit.getImage(imageUrl);
+			final Taskbar taskbar = Taskbar.getTaskbar();
+
+            //sets icon for mac
+			taskbar.setIconImage(icon);
+
+			//set icon for windows
+			this.setIconImage(icon);
+
+        } catch (Exception exception) {
+            System.out.println("Error loading icon: " + exception.getMessage());
+        } 
+      
         JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
         
@@ -34,13 +49,13 @@ public class CubeGUI extends JFrame{
         this.setSize(1024,768);
        
         // Make this JFrame visible
-        this.setVisible(true);
+		this.setVisible(true);
+		
 	}
 
 	public static void main(String[] args) {
 		new CubeGUI();
 	}
-	
 
 }
 
