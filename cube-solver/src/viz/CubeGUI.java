@@ -1,14 +1,9 @@
 package viz;
 
-
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
 import javax.swing.*;
-import javax.tools.*;
 import java.net.URL;
-import javax.imageio.*;
+
 import viz.*;
 
 public class CubeGUI extends JFrame{
@@ -18,37 +13,23 @@ public class CubeGUI extends JFrame{
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
-		//change default icon
-		// URL url = ClassLoader.getSystemResource(".");
-		// System.out.println("URL: "+url);
-		// Toolkit toolkit = Toolkit.getDefaultToolkit();
-		//Image icon = toolkit.getImage(this.getClass().getResource("image.png"));
+        //Set GUI dock icon
+        try {
+			final Toolkit toolkit = Toolkit.getDefaultToolkit();
+			final URL imageUrl = this.getClass().getClassLoader().getResource("cube.png");
+			final Image icon = toolkit.getImage(imageUrl);
+			final Taskbar taskbar = Taskbar.getTaskbar();
 
-		// Image icon = toolkit.createImage(url);
-		// this.setIconImage(icon);
+            //sets icon for mac
+			taskbar.setIconImage(icon);
 
-		// ImageIcon icon = new ImageIcon(".//assets//icons//cube.png");
-		// this.setIconImage(icon.getImage());
-		Image icon = null;
-		try{    
-			//String filepath = "/Users/brad/git/project-rubikscubesolver/cube-solver/src/viz/assets/icons/cube.png";
-			// String filepath = "./cube.png";
-			// this.setIconImage(new ImageIcon(getClass().getResource(filepath)).getImage());
-			// this.setIconImage(new ImageIcon(this.getClass().getResource(filepath)).getImage());
-			String imagePath = "/cube.png";
-			URL imageUrl = CubeGUI.class.getResource(imagePath);
-			icon = Toolkit.getDefaultToolkit().getImage(imageUrl);
-		}
-	 	catch (Exception exception){
-			//do something
-			System.out.println("Error loading icon: " + exception.getMessage());
-		}
-		if(icon != null){
+			//set icon for windows
 			this.setIconImage(icon);
-		}
 
-
-	    
+        } catch (Exception exception) {
+            System.out.println("Error loading icon: " + exception.getMessage());
+        } 
+      
         JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
         
@@ -74,13 +55,7 @@ public class CubeGUI extends JFrame{
 
 	public static void main(String[] args) {
 		new CubeGUI();
-      
-		// BufferedReader reader = new BufferedReader(new FileReader(file));
-		// String currentLine = reader.readLine();
-		// reader.close();
-		// System.out.println();
 	}
-	
 
 }
 
