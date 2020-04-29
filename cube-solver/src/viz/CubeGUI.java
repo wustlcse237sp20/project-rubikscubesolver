@@ -30,18 +30,25 @@ public class CubeGUI extends JFrame{
             System.out.println("Error loading icon: " + exception.getMessage());
         } 
       
-        JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout());
         
 		//create panel for settings
 		Settings settings = new Settings();
 		
-		//create panel for cube
+		//create panel for cube and controls
+		JPanel mainArea = new JPanel(new BorderLayout());
 		CubePanel cubeArea = new CubePanel();
+		UpperDisplay upperDisplay = new UpperDisplay();
+		LowerControls lowerControls = new LowerControls();
+
+		mainArea.add(upperDisplay.getPanel(), BorderLayout.NORTH);
+		mainArea.add(cubeArea, BorderLayout.CENTER);
+		mainArea.add(lowerControls.getPanel(), BorderLayout.SOUTH);
+
 
     	// Add the panel to this JFrame
 		mainPanel.add(settings.getPanel(), BorderLayout.WEST);
-		mainPanel.add(cubeArea);
+		mainPanel.add(mainArea);
 
 		this.add(mainPanel);
 		
