@@ -5,6 +5,7 @@ import java.util.List;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import util.*;
 
 
 public class Components {
@@ -26,13 +27,18 @@ public class Components {
         return panel;
     }
 
-    public JPanel createButton(String label, int height, ActionListener action){
+    public JButton createButton(String label, int height, ActionListener action){
         JButton button = new JButton(label);
         button.setFont(new Font(this.FONT_NAME, Font.PLAIN, 18));
         button.setLayout(new FlowLayout());
         button.setPreferredSize(new Dimension(this.width-32, height-16));
         //add action listener
         button.addActionListener(action);
+        return button;
+    }
+
+    public JPanel createPanelButton(String label, int height, ActionListener action){
+        JButton button = createButton(label, height, action);
         return createPanelComponet(button, height);
     }
 
@@ -59,15 +65,18 @@ public class Components {
         return panel;
     }
 
-    public JPanel createChoice(List<String> validChoices, int height){
-        Choice choice = new Choice();
-        choice.setFont(new Font("Airal", Font.PLAIN, 18));
-        choice.setSize(new Dimension(this.width-32, height));
-        choice.setPreferredSize(new Dimension(this.width-32, height));
-        for(String option: validChoices){
-            choice.add(option);
-        }
-        return createPanelComponet(choice, height);
+    public JPanel createComboBox(List<String> validChoices, int defaultChoice, Consumer<Integer> action){
+        JComboBox comboBox = new JComboBox(validChoices.toArray());
+        comboBox.setFont(new Font("Airal", Font.PLAIN, 18));
+        comboBox.setSize(new Dimension(this.width-32, 64));
+        comboBox.setPreferredSize(new Dimension(this.width-32, 64));
+        comboBox.setSelectedIndex(defaultChoice);
+        comboBox.addActionListener((event) -> {
+            int selectedIndex = comboBox.getSelectedIndex();
+            action.run(selectedIndex);
+        });
+
+        return createPanelComponet(comboBox, 64);
     }
 
 }

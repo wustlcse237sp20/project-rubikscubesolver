@@ -1,15 +1,16 @@
 package viz;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class LowerControls extends JPanel {
 
+    private static final long serialVersionUID = 1L;
+
     private JPanel lowerControlsPanel;
 
     private final int WIDTH = 832;
-    private final int HEIGHT = 128;
+    private final int HEIGHT = 96;
 
     public LowerControls(){
         this.lowerControlsPanel = new JPanel();

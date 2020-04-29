@@ -9,7 +9,7 @@ import java.util.ListIterator;
 import java.util.Random;
 
 import cube.Algorithm;
-import cube.Color;
+import cube.CubeColor;
 import cube.Cube;
 import cube.Facelet;
 import cube.Move;
@@ -221,13 +221,13 @@ public class Min2PhaseV3 {
 		//is G1 if 2 opposing sides 
 		Facelet[][] facelets = cube.getFacelets();
 		for(int faceInt = 0; faceInt <=2; ++faceInt) {
-			Color currentFaceColor = facelets[faceInt][4].getColor();
-			Color equivFaceColor = facelets[faceInt + 3][4].getColor();
+			CubeColor currentFaceCubeColor = facelets[faceInt][4].getColor();
+			CubeColor equivFaceCubeColor = facelets[faceInt + 3][4].getColor();
 			for(int faceletInt = 0; faceletInt < 9; ++faceletInt) {
-				Color faceletColor = facelets[faceInt][faceletInt].getColor();
-				Color oppositeFaceletColor = facelets[faceInt+3][faceletInt].getColor();
-				if(faceletColor.equals(currentFaceColor) ||  faceletColor.equals(equivFaceColor)) {
-					if(oppositeFaceletColor.equals(currentFaceColor) ||  oppositeFaceletColor.equals(equivFaceColor)) {
+				CubeColor faceletCubeColor = facelets[faceInt][faceletInt].getColor();
+				CubeColor oppositeFaceletCubeColor = facelets[faceInt+3][faceletInt].getColor();
+				if(faceletCubeColor.equals(currentFaceCubeColor) ||  faceletCubeColor.equals(equivFaceCubeColor)) {
+					if(oppositeFaceletCubeColor.equals(currentFaceCubeColor) ||  oppositeFaceletCubeColor.equals(equivFaceCubeColor)) {
 						if(faceletInt == 8) {
 							return faceInt;
 						}
