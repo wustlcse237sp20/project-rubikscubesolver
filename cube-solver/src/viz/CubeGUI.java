@@ -4,15 +4,20 @@ import java.awt.*;
 import javax.swing.*;
 import java.net.URL;
 
+import cube.*;
 import viz.*;
 
 public class CubeGUI extends JFrame{
+	private Cube cube; 
 
 	public CubeGUI() {
 	    super(" Rubik's Cube Explorer ");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
+		//create cube 
+		this.cube = new Cube(3);
+
         //Set GUI dock icon
         try {
 			final Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -37,7 +42,7 @@ public class CubeGUI extends JFrame{
 		
 		//create panel for cube and controls
 		JPanel mainArea = new JPanel(new BorderLayout());
-		CubePanel cubeArea = new CubePanel();
+		CubePanel cubeArea = new CubePanel(cube);
 		UpperDisplay upperDisplay = new UpperDisplay();
 		LowerControls lowerControls = new LowerControls();
 
