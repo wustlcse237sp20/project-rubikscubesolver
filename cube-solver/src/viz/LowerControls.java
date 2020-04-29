@@ -9,7 +9,7 @@ public class LowerControls extends JPanel {
     private JPanel lowerControlsPanel;
 
     private final int WIDTH = 832;
-    private final int HEIGHT = 128;
+    private final int HEIGHT = 96;
 
     public LowerControls(){
         this.lowerControlsPanel = new JPanel();

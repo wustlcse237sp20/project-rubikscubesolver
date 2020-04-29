@@ -16,7 +16,11 @@ public class CubeGUI extends JFrame{
 		this.setLayout(new BorderLayout());
 		
 		//create cube 
-		this.cube = new Cube(3);
+		this.cube = new Cube(2);
+
+		Algorithm scramble = new Algorithm();
+		scramble.generateScramble(this.cube.getSize(), 40);
+		this.cube.applyAlgorithm(scramble);
 
         //Set GUI dock icon
         try {

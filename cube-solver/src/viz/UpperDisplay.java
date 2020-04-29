@@ -10,7 +10,7 @@ public class UpperDisplay extends JPanel {
     private JPanel upperDisplayPanel;
 
     private final int WIDTH = 832;
-    private final int HEIGHT = 128;
+    private final int HEIGHT = 96;
 
     public UpperDisplay(){
         this.upperDisplayPanel = new JPanel();
