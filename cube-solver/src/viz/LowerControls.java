@@ -1,10 +1,11 @@
 package viz;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class LowerControls extends JPanel {
+
+    private static final long serialVersionUID = 1L;
 
     private JPanel lowerControlsPanel;
 
@@ -17,7 +18,7 @@ public class LowerControls extends JPanel {
         Color backgroundColor = UIManager.getColor("Panel.background");
 
         this.lowerControlsPanel.setBackground(backgroundColor);
-        //this.lowerControlsPanel.setBackground(Color.BLUE);
+        // this.lowerControlsPanel.setBackground(Color.BLUE);
         this.lowerControlsPanel.setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
 
     }

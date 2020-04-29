@@ -1,8 +1,10 @@
 package cube;
 
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.LinkedList;
+import java.util.List;
+
 
 /**
  * Class to represent moves on a NxNxN cube
@@ -41,9 +43,7 @@ public class Move {
 			System.out.println("Not a valid move");
 		}
 	}
-	
-	
-	
+
 	private boolean checkValidMove(String move) {
 		return checkFaceTurn(move) | checkMiddleTurn(move) | checkCubeRotation(move) | checkInnerTurn(move)
 				| checkWideTurn(move);
@@ -153,7 +153,7 @@ public class Move {
 	public boolean isCounterClockwise() {
 		return counterClockwise;
 	}
-	
+
 	public boolean isMiddleRotation() {
 		return middleRotation;
 	}
@@ -173,6 +173,7 @@ public class Move {
 	 * https://www.worldcubeassociation.org/regulations/#article-12-notation
 	 * 
 	 * @param move string to check
+	 * 
 	 * @return true if move is valid, else false
 	 */
 	public boolean isValidMove(String move) {
@@ -190,16 +191,18 @@ public class Move {
 	 * https://www.worldcubeassociation.org/regulations/#article-12-notation
 	 * 
 	 * @param move string to check
+	 * 
 	 * @param cubeSize to check if the move is possible given the cube size
+	 * 
 	 * @return true if move is valid, else false
 	 */
 	public static boolean isValidMove(String move, int cubeSize) {
-		//can't turn more layers than the size of the cube
-		if(layerCount > cubeSize) {
+		// can't turn more layers than the size of the cube
+		if (layerCount > cubeSize) {
 			return false;
 		}
-		//can't have an inner rotation if cube size less than or equal to 2
-		if(innerRotation && cubeSize <= 2) {
+		// can't have an inner rotation if cube size less than or equal to 2
+		if (innerRotation && cubeSize <= 2) {
 			return false;
 		}
 		//can't have a middle move if even cube
@@ -211,6 +214,36 @@ public class Move {
 				| move.matches(CUBE_ROTATION_NOTATION) | move.matches(INNER_SLICE_NOTATION)
 				| move.matches(WIDE_TURN_NOTATION);
 
+	}
+
+	public static List<Move> getValidCubeMoves(int cubeSize){
+		List<Move> validMoves = new LinkedList<Move>();
+		String faces = "URFDLB";
+		String middleMoves = "MES";
+		String cubeRotations = "xyz";
+		for(char move : faces.toCharArray()){
+			validMoves.add(new Move(move+""));
+			validMoves.add(new Move(move+"\'"));
+		}
+		if(cubeSize >= 4){
+			for(int turnCount=2; turnCount<=(int)Math.ceil(cubeSize/2.0); turnCount++){
+				for(char move : faces.toCharArray()){
+					validMoves.add(new Move(turnCount+""+move+"w"));
+					validMoves.add(new Move(turnCount+""+move+"w\'"));
+				}
+			}
+		}
+		if(cubeSize%2 == 1){
+			for(char move : middleMoves.toCharArray()){
+				validMoves.add(new Move(move+""));
+				validMoves.add(new Move(move+"\'"));
+			}
+		}
+		for(char move : cubeRotations.toCharArray()){
+			validMoves.add(new Move(move+""));
+			validMoves.add(new Move(move+"\'"));
+		}
+		return validMoves;
 	}
 
 	public String toString() {

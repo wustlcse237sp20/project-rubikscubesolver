@@ -3,8 +3,9 @@ package viz;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import cube.*;
+import util.*;
 
 /**
  * 
@@ -14,13 +15,12 @@ import javax.swing.*;
  */
 public class Settings {
 
-    private JPanel settingsPanel;
-    
+    private JPanel settingsPanel;    
     private final int WIDTH = 192;
     private final int HEIGHT = 768;
 
     
-    public Settings() {
+    public Settings(CubePanel cubePanel, UpperDisplay upperDisplay) {
         //init  panel
         this.settingsPanel = new JPanel();
         this.settingsPanel.setBackground(Color.WHITE);
@@ -31,12 +31,33 @@ public class Settings {
         Box box = Box.createVerticalBox();
     
         box.add(components.createLabel(" Settings ", 32, Font.BOLD));
-        box.add(components.createButton(" Scramble ", 64, new scrambleButtonListener()));
-        box.add(components.createButton("   Reset   ", 64, new resetButtonListener()));
-        box.add(components.createButton("   Solve   ", 64, new solveButtonListener()));
+        box.add(components.createPanelButton(" Scramble ", 64, (event) -> {
+            this.scrambleCube(cubePanel, upperDisplay);
+        }));
+        box.add(components.createPanelButton("   Reset   ", 64, (event) -> {
+            this.resetCube(cubePanel, upperDisplay);
+        }));
+        box.add(components.createPanelButton("   Solve   ", 64, (event) -> {
+            this.solveCube(cubePanel, upperDisplay);
+        }));
         box.add(components.createLabel(" Select Cube Size ", 18, Font.PLAIN));
-        box.add(components.createChoice(createCubeChoices(2,7), 64));
+     
+        box.add(components.createComboBox(createCubeChoices(2,7), cubePanel.getCube().getSize()-2,
+            new Consumer<Integer>(){
+                @Override
+                public void run(Integer selectedIndex){
+                    upperDisplay.hideButtons();
+                    upperDisplay.setDisplayMessage("", "");
+                    int cubeSize = selectedIndex+2;
+                    Cube newCube = new Cube(cubeSize);
+                    cubePanel.setCube(newCube);
+                    cubePanel.repaint();
+                }
+            }
+            
+        ));
 
+        
         this.settingsPanel.add(box);
     }
 
@@ -52,24 +73,40 @@ public class Settings {
         return validCubeChoices;
     }
 
-    private class scrambleButtonListener implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
-        	System.out.println("Scramble");
-        }
+    private void scrambleCube(CubePanel cubePanel, UpperDisplay upperDisplay){
+        upperDisplay.hideButtons();
+        Algorithm scramble = new Algorithm();
+        int cubeSize = cubePanel.getCube().getSize();
+        Cube newCube = new Cube(cubeSize);
+        scramble.generateScramble(cubeSize, 5);
+        newCube.applyAlgorithm(scramble);
+        cubePanel.setCube(newCube);
+        System.out.println(scramble.toString());
+        upperDisplay.setDisplayMessage("Scramble: ", scramble.toString());
+        cubePanel.repaint();
     }
-    
-    private class resetButtonListener implements ActionListener {
 
-        public void actionPerformed(ActionEvent e) {
-        	System.out.println("Reset");
-        }
+    private void resetCube(CubePanel cubePanel, UpperDisplay upperDisplay){
+        upperDisplay.hideButtons();
+        upperDisplay.setDisplayMessage("", "");
+        int cubeSize = cubePanel.getCube().getSize();
+        Cube newCube = new Cube(cubeSize);
+        cubePanel.setCube(newCube);
+        cubePanel.repaint();
     }
 
-	private class solveButtonListener implements ActionListener {
+    private void solveCube(CubePanel cubePanel, UpperDisplay upperDisplay){
+        upperDisplay.showButtons();
+        upperDisplay.setDisplayMessage("Solution: ", "R2 F D\' U R L");
 
-        public void actionPerformed(ActionEvent e) {
-        	System.out.println("Solve");
-        }
-	}
+        System.out.println("Solve");
+        //TODO make this solve the cube
+    }
+
+    private void updateCubeSize(CubePanel cubePanel, int selectedIndex) {
+        int cubeSize = selectedIndex+2;
+        Cube newCube = new Cube(cubeSize);
+        cubePanel.setCube(newCube);
+    }
+
 }

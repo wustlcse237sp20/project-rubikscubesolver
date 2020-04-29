@@ -2,6 +2,7 @@ package cube;
 
 /**
  * Class to a NxNxN cube
+ * 
  * @author Brad Hodkinson
  */
 public class Cube {
