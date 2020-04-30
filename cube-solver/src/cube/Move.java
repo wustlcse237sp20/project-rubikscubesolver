@@ -44,6 +44,23 @@ public class Move {
 		}
 	}
 
+	public Move getInverse(){
+		String moveString = this.toString();
+		if(moveString.contains("'")){
+			Move inv = new Move(moveString.substring(0, moveString.length()-1));
+			return inv;
+		}
+		else{
+			if(moveString.length() == 2){
+				return this;
+			}
+			else{
+				Move inv = new Move(moveString.concat("\'"));
+				return inv;
+			}
+		}
+	}
+
 	private boolean checkValidMove(String move) {
 		return checkFaceTurn(move) | checkMiddleTurn(move) | checkCubeRotation(move) | checkInnerTurn(move)
 				| checkWideTurn(move);

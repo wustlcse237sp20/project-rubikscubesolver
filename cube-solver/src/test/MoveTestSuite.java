@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import cube.Cube;
 import cube.Move;
+import solver.Min2PhaseUtil;
 
 class MoveTestSuite {
 	
@@ -29,6 +31,17 @@ class MoveTestSuite {
 
 			//test double rotation
 			testDoubleMove(move, face, expectedLayerCount, expectedInnerRotation);
+		}
+	}
+
+	@Test
+	void testGetInverseMove(){
+		Move[] moves = Min2PhaseUtil.getG0Moves();
+		Cube testCube = new Cube(3);
+		for(Move m : moves){
+			testCube.rotate(m);
+			testCube.rotate(m.getInverse());
+			assertTrue(testCube.isSolved());
 		}
 	}
 	

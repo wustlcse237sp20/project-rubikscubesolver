@@ -45,7 +45,7 @@ public class CubeGUI extends JFrame{
 		CubePanel cubeArea = new CubePanel(cube);
 
 		//create panel for settings, display, and controls
-		UpperDisplay upperDisplay = new UpperDisplay();
+		UpperDisplay upperDisplay = new UpperDisplay(cubeArea);
 		LowerControls lowerControls = new LowerControls();
 		Settings settings = new Settings(cubeArea, upperDisplay);
 

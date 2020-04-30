@@ -6,6 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 import cube.*;
 import util.*;
+import solver.*;
 
 /**
  * 
@@ -76,14 +77,20 @@ public class Settings {
     private void scrambleCube(CubePanel cubePanel, UpperDisplay upperDisplay){
         upperDisplay.hideButtons();
         Algorithm scramble = new Algorithm();
-        int cubeSize = cubePanel.getCube().getSize();
+        Cube cube = cubePanel.getCube();
+        int cubeSize = cube.getSize();
         Cube newCube = new Cube(cubeSize);
-        scramble.generateScramble(cubeSize, 5);
-        newCube.applyAlgorithm(scramble);
+        if(cubeSize <= 3){
+            scramble = Min2PhaseUtil.simpleScramble(5, newCube);
+        }
+        else{
+            scramble.generateScramble(cubeSize, 20);
+            newCube.applyAlgorithm(scramble);
+        }
         cubePanel.setCube(newCube);
-        System.out.println(scramble.toString());
         upperDisplay.setDisplayMessage("Scramble: ", scramble.toString());
         cubePanel.repaint();
+        
     }
 
     private void resetCube(CubePanel cubePanel, UpperDisplay upperDisplay){
@@ -96,12 +103,14 @@ public class Settings {
     }
 
     private void solveCube(CubePanel cubePanel, UpperDisplay upperDisplay){
+        Cube cube = new Cube(cubePanel.getCube());
+        SolverContext context = new SolverContext(new Min2Phase());
+        Algorithm solution = context.solveCube(cube);
+        upperDisplay.setSolution(solution);
         upperDisplay.showButtons();
-        upperDisplay.setDisplayMessage("Solution: ", "R2 F D\' U R L");
-
-        System.out.println("Solve");
-        //TODO make this solve the cube
+        upperDisplay.setDisplayMessage("Solution: ", solution.toString());
     }
+
 
     private void updateCubeSize(CubePanel cubePanel, int selectedIndex) {
         int cubeSize = selectedIndex+2;
