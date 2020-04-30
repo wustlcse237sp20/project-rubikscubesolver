@@ -2,11 +2,7 @@ package solver;
 
 import java.util.Random;
 
-import cube.Algorithm;
-import cube.Color;
-import cube.Cube;
-import cube.Facelet;
-import cube.Move;
+import cube.*;
 
 /**
  * Class defines helper methods for the Min2Phase Algorithm
@@ -27,11 +23,11 @@ public class Min2PhaseUtil {
 		int notG1Cube = 6;
 		Facelet[][] facelets = cube.getFacelets();
 		for(int faceInt = 0; faceInt < cubeSize; ++faceInt) {
-			Color thisFace = facelets[faceInt][staticFacelet].getColor();
-			Color oppositeFace = facelets[faceInt + 3][staticFacelet].getColor();
+			CubeColor thisFace = facelets[faceInt][staticFacelet].getColor();
+			CubeColor oppositeFace = facelets[faceInt + 3][staticFacelet].getColor();
 			for(int faceletInt = 0; faceletInt < faceletsInFace; ++faceletInt) {
-				Color facelet = facelets[faceInt][faceletInt].getColor();
-				Color oppositeFacelet = facelets[faceInt+3][faceletInt].getColor();
+				CubeColor facelet = facelets[faceInt][faceletInt].getColor();
+				CubeColor oppositeFacelet = facelets[faceInt+3][faceletInt].getColor();
 				if(facelet.equals(thisFace) ||  facelet.equals(oppositeFace)) {
 					if(oppositeFacelet.equals(thisFace) || oppositeFacelet.equals(oppositeFace)) {
 						if(faceletInt == faceletsInFace - 1) {
