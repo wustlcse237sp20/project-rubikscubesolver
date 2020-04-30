@@ -42,7 +42,7 @@ public class Cube {
 	
 	/**
 	 * Public deep copy constructor
-	 * @param a cube to copy
+	 * @param toCopy cube to copy
 	 */
 	public Cube(Cube toCopy) {
 		this.size = toCopy.size;

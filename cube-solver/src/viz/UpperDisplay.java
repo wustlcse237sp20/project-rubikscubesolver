@@ -63,22 +63,27 @@ public class UpperDisplay extends JPanel {
                 this.solutionIndex++;
                 cube.rotate(move);
                 cubePanel.repaint();
+                cubePanel.setCube(cube);
             }
             
             
         });
         this.previousButton = controlComponents.createButton("Previous", 56, (event)->{
             System.out.println("Previous");
+            Cube cube = cubePanel.getCube();
             
             if(this.solutionIndex > 0){
-                Cube cube = cubePanel.getCube();
+                this.solutionIndex--;
+
+
                 List<Move> solutionList = this.solution.getMoveList();
                 Move prevMove = (Move)solutionList.toArray()[this.solutionIndex];
+                Move inverse = prevMove.getInverse();
                 System.out.println(prevMove.toString());
+                System.out.println(inverse.toString());
                 System.out.println("Solution index "+ this.solutionIndex);
-                cube.rotate(prevMove);
-                
-                this.solutionIndex--;
+                cube.rotate(inverse);
+                cubePanel.setCube(cube);
                 cubePanel.repaint();
             }
         });

@@ -31,11 +31,11 @@ public class CubePanel extends JPanel {
 	}
 
 	public Cube getCube(){
-		return this.cube;
+		return new Cube(this.cube);
 	}
 
 	public void setCube(Cube cube){
-		this.cube = cube;
+		this.cube = new Cube(cube);
 		this.faceletSize = calculateFaceletSize(this.cube.getSize());
 	}
 
@@ -116,8 +116,8 @@ public class CubePanel extends JPanel {
 				graphics.setColor(this.convertCubeColorToColor(currentFace[i*cubeSize+j].getColor()));
 
 				//calcualte coordinates
-				int x = faceX + (spacing+i*this.faceletSize);
-				int y = faceY + (spacing+j*this.faceletSize+this.faceletSize)-26;
+				int x = faceX + (spacing+j*this.faceletSize);
+				int y = faceY + (spacing+i*this.faceletSize+this.faceletSize)-26;
 				
 				//make a square: x, y, width, height
 				graphics.fillRect(x, y, rectSize, rectSize);

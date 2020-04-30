@@ -79,18 +79,21 @@ public class Settings {
         Algorithm scramble = new Algorithm();
         Cube cube = cubePanel.getCube();
         int cubeSize = cube.getSize();
+        Cube newCube = new Cube(cubeSize);
         if(cubeSize <= 3){
-            scramble = Min2PhaseUtil.simpleScramble(5, cube);
+            scramble = Min2PhaseUtil.simpleScramble(5, newCube);
+            System.out.println("HERE" + scramble.getMoveList().toString());
+
         }
         else{
             scramble.generateScramble(cubeSize, 20);
+            newCube.applyAlgorithm(scramble);
         }
-        Cube newCube = new Cube(cubeSize);
-        newCube.applyAlgorithm(scramble);
         cubePanel.setCube(newCube);
         System.out.println(scramble.toString());
         upperDisplay.setDisplayMessage("Scramble: ", scramble.toString());
         cubePanel.repaint();
+        
     }
 
     private void resetCube(CubePanel cubePanel, UpperDisplay upperDisplay){
@@ -103,23 +106,14 @@ public class Settings {
     }
 
     private void solveCube(CubePanel cubePanel, UpperDisplay upperDisplay){
-        
-        Cube cube = cubePanel.getCube();
-
+        Cube cube = new Cube(cubePanel.getCube());
         SolverContext context = new SolverContext(new Min2Phase());
-        System.out.println("Before:");
-        System.out.println(cube);
         Algorithm solution = context.solveCube(cube);
         upperDisplay.setSolution(solution);
-        System.out.println("After:");
-        System.out.println(cube);
-        System.out.println(solution.toString());
         upperDisplay.showButtons();
         upperDisplay.setDisplayMessage("Solution: ", solution.toString());
-
-        System.out.println("Solve");
-        //TODO make this solve the cube
     }
+
 
     private void updateCubeSize(CubePanel cubePanel, int selectedIndex) {
         int cubeSize = selectedIndex+2;
