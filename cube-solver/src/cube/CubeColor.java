@@ -9,7 +9,7 @@ package cube;
 //    YELLOW;
 //}
 
-public enum Color {
+public enum CubeColor {
     WHITE {
         public String toString() {
             return "W";

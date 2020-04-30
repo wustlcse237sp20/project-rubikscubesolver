@@ -137,7 +137,6 @@ public class Min2PhaseTestSuite {
 	void phase1SolverTest(Cube testCube) {
 		Cube cubeCopy = new Cube(testCube);
 		PhaseContext phase1Context = new PhaseContext(new Phase1Solver());
-		System.out.println(testCube);
 		Algorithm solution = phase1Context.solvePhase(cubeCopy);
 		testCube.applyAlgorithm(solution);
 		assertTrue(testCube.isSolved()==true);	

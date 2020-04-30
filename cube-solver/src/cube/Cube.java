@@ -2,6 +2,7 @@ package cube;
 
 /**
  * Class to a NxNxN cube
+ * 
  * @author Brad Hodkinson
  */
 public class Cube {
@@ -9,7 +10,7 @@ public class Cube {
 	//6 faces of the cube: Up, Right, Front, Down, Back, Left
 	final char[] FACES = new char[] {'U','R', 'F', 'D', 'L', 'B'};
 	//6 colors of the cube
-	Color[] colors = new Color[] {Color.WHITE, Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.ORANGE};
+	CubeColor[] colors = new CubeColor[] {CubeColor.WHITE, CubeColor.BLUE, CubeColor.RED, CubeColor.YELLOW, CubeColor.GREEN, CubeColor.ORANGE};
 	
 		
 	int size;
@@ -62,7 +63,7 @@ public class Cube {
 	public boolean isSolved() {
 		//check if all the colors on the cube are the same
 		for(Facelet[] face : this.cube) {
-			Color firstColor = face[0].getColor();
+			CubeColor firstColor = face[0].getColor();
 			for(int i=1; i<face.length; i++) {
 				if(face[i].getColor() != firstColor) {
 					return false;

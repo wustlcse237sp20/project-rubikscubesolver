@@ -4,15 +4,22 @@ import java.awt.*;
 import javax.swing.*;
 import java.net.URL;
 
+import cube.*;
 import viz.*;
 
 public class CubeGUI extends JFrame{
+
+	public Cube cube; 
+	private final int DEFAULT_CUBE_SIZE = 3;
 
 	public CubeGUI() {
 	    super(" Rubik's Cube Explorer ");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
+		//create cube 
+		this.cube = new Cube(DEFAULT_CUBE_SIZE);
+
         //Set GUI dock icon
         try {
 			final Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -29,19 +36,27 @@ public class CubeGUI extends JFrame{
         } catch (Exception exception) {
             System.out.println("Error loading icon: " + exception.getMessage());
         } 
-      
-        JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout());
-        
-		//create panel for settings
-		Settings settings = new Settings();
+	  
+		//create main panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
 		
-		//create panel for cube
-		CubePanel cubeArea = new CubePanel();
+		//create panel for cube and controls
+		JPanel mainArea = new JPanel(new BorderLayout());
+		CubePanel cubeArea = new CubePanel(cube);
+
+		//create panel for settings, display, and controls
+		UpperDisplay upperDisplay = new UpperDisplay();
+		LowerControls lowerControls = new LowerControls();
+		Settings settings = new Settings(cubeArea, upperDisplay);
+
+		mainArea.add(upperDisplay.getPanel(), BorderLayout.NORTH);
+		mainArea.add(cubeArea, BorderLayout.CENTER);
+		mainArea.add(lowerControls.getPanel(), BorderLayout.SOUTH);
+
 
     	// Add the panel to this JFrame
 		mainPanel.add(settings.getPanel(), BorderLayout.WEST);
-		mainPanel.add(cubeArea);
+		mainPanel.add(mainArea);
 
 		this.add(mainPanel);
 		
@@ -51,10 +66,6 @@ public class CubeGUI extends JFrame{
         // Make this JFrame visible
 		this.setVisible(true);
 		
-	}
-
-	public static void main(String[] args) {
-		new CubeGUI();
 	}
 
 }

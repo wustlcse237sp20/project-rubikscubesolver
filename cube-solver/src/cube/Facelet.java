@@ -2,11 +2,11 @@ package cube;
 
 public class Facelet {
 
-	Color color;
+	CubeColor color;
 	String location;
 	boolean displayLocation;
 	
-	public Facelet(Color color, String location, boolean displayLocation) {
+	public Facelet(CubeColor color, String location, boolean displayLocation) {
 		this.color = color;
 		this.location = location;
 		this.displayLocation = displayLocation;
@@ -18,11 +18,11 @@ public class Facelet {
 		this.displayLocation = facelet.displayLocation;
 	}
 	
-	public Color getColor() {
+	public CubeColor getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(CubeColor color) {
 		this.color = color;
 	}
 
