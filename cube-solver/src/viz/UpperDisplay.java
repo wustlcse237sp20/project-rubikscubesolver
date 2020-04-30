@@ -1,8 +1,13 @@
 package viz;
 
-import java.awt.*;
+import java.util.List;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.*;
 import javax.swing.*;
+import cube.*;
+
+
 
 
 public class UpperDisplay extends JPanel {
@@ -22,8 +27,11 @@ public class UpperDisplay extends JPanel {
     private JButton nextButton;
     private JButton previousButton;
 
+    private Algorithm solution;
+    private int solutionIndex;
 
-    public UpperDisplay(){
+
+    public UpperDisplay(CubePanel cubePanel){
         this.upperDisplayPanel = new JPanel();
 
         this.backgroundColor = UIManager.getColor("Panel.background");
@@ -44,8 +52,36 @@ public class UpperDisplay extends JPanel {
         horizontalControls.add(Box.createHorizontalStrut(256));
         horizontalControls.add(Box.createHorizontalGlue());
 
-        this.nextButton = controlComponents.createButton("Next", 56, new nextButtonListener());
-        this.previousButton = controlComponents.createButton("Previous", 56, new previousButtonListener());
+        this.nextButton = controlComponents.createButton("Next", 56, (event) -> {
+            System.out.println("Next");
+            Cube cube = cubePanel.getCube();
+            List<Move> solutionList = this.solution.getMoveList();
+
+            if(this.solutionIndex < solutionList.size()){
+                Move move = (Move)solutionList.toArray()[this.solutionIndex];
+                System.out.println("i = " + this.solutionIndex + " "+move.toString());
+                this.solutionIndex++;
+                cube.rotate(move);
+                cubePanel.repaint();
+            }
+            
+            
+        });
+        this.previousButton = controlComponents.createButton("Previous", 56, (event)->{
+            System.out.println("Previous");
+            
+            if(this.solutionIndex > 0){
+                Cube cube = cubePanel.getCube();
+                List<Move> solutionList = this.solution.getMoveList();
+                Move prevMove = (Move)solutionList.toArray()[this.solutionIndex];
+                System.out.println(prevMove.toString());
+                System.out.println("Solution index "+ this.solutionIndex);
+                cube.rotate(prevMove);
+                
+                this.solutionIndex--;
+                cubePanel.repaint();
+            }
+        });
 
         horizontalControls.add(previousButton);
         horizontalControls.add(nextButton);
@@ -83,20 +119,12 @@ public class UpperDisplay extends JPanel {
 
     }
 
-    private class previousButtonListener implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
-        	System.out.println("Previous");
-        }
+    public void setSolution(Algorithm algorithm){
+        this.solution = algorithm;
+        this.solutionIndex = 0;
     }
-    
 
-    private class nextButtonListener implements ActionListener {
 
-        public void actionPerformed(ActionEvent e) {
-        	System.out.println("Next");
-        }
-    }
     
 
 
