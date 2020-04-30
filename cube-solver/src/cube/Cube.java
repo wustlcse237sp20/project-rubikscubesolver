@@ -54,15 +54,6 @@ public class Cube {
 		}
 	}
 	
-//	protected Object clone() throws CloneNotSupportedException {
-//	    Cube cloned = (Cube)super.clone();
-//	    cloned.setFacelets((Facelet)cloned.getFacelets().clone());   
-//	    return cloned;
-//	}
-	
-	
-	
-	
 	
 	/*
 	 * Method to check if the cube is solved

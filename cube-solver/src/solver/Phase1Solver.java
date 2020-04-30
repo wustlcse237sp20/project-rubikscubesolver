@@ -27,7 +27,6 @@ public class Phase1Solver implements PhaseStrategy {
 		int g1Face = Min2PhaseUtil.findG1Face(cubeToPhaseSolve);
 		moves = Min2PhaseUtil.getG1Moves(g1Face);
 		
-	
 		while(!tempCube.isSolved()) {
 			for(int depth = 1; depth <= maxDepth; ++depth) {
 				int numAlgsPerDepth = (int) Math.pow(maxDepth, depth);

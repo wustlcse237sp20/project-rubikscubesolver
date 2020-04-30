@@ -17,7 +17,7 @@ public class Solver {
 		
 		System.out.println(cube);
 		
-		Min2PhaseUtil.simpleScramble(5, cube);
+		Min2PhaseUtil.simpleScramble(10, cube);
 		
 		
 		System.out.println(cube);

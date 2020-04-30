@@ -11,6 +11,7 @@ import cube.Move;
  */
 public class Min2Phase implements SolverStrategy {
 	
+	
 	/**
 	 * Solves a cube by converting it from a G0 state into a G1 state and finally into the solved state 
 	 * "http://kociemba.org/cube.htm" 
@@ -29,6 +30,7 @@ public class Min2Phase implements SolverStrategy {
 		return solution;	
 	}
 	
+	
 	/**
 	 *	Adds toAdd's move list to original's move list
 	 */
@@ -37,4 +39,6 @@ public class Min2Phase implements SolverStrategy {
 			original.addToMoveList(m);
 		}
 	}
+	
+	
 }

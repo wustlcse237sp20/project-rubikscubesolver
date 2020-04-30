@@ -114,23 +114,6 @@ public class Min2PhaseUtil {
 		return moves;
 	}
 	
-	/**
-	 * 
-	 * @param cube current cube
-	 * @param faceInt the face to print
-	 */
-	public static void printFace(Cube cube, int faceInt) {
-		Facelet[] face = cube.getFace(faceInt);
-		for(int x=0; x<cube.getSize(); ++x) {
-			String row = "";
-			for(int y = 0; y < cube.getSize(); ++y) {
-				row += face[(3 * x) + y].getLocation()+ " ";
-			}
-			System.out.println(row);
-		}
-		System.out.println("\n");
-	}
-	
 	
 	
 }
