@@ -82,15 +82,12 @@ public class Settings {
         Cube newCube = new Cube(cubeSize);
         if(cubeSize <= 3){
             scramble = Min2PhaseUtil.simpleScramble(5, newCube);
-            System.out.println("HERE" + scramble.getMoveList().toString());
-
         }
         else{
             scramble.generateScramble(cubeSize, 20);
             newCube.applyAlgorithm(scramble);
         }
         cubePanel.setCube(newCube);
-        System.out.println(scramble.toString());
         upperDisplay.setDisplayMessage("Scramble: ", scramble.toString());
         cubePanel.repaint();
         

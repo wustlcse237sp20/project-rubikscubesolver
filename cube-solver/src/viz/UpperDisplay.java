@@ -53,13 +53,11 @@ public class UpperDisplay extends JPanel {
         horizontalControls.add(Box.createHorizontalGlue());
 
         this.nextButton = controlComponents.createButton("Next", 56, (event) -> {
-            System.out.println("Next");
             Cube cube = cubePanel.getCube();
             List<Move> solutionList = this.solution.getMoveList();
 
             if(this.solutionIndex < solutionList.size()){
                 Move move = (Move)solutionList.toArray()[this.solutionIndex];
-                System.out.println("i = " + this.solutionIndex + " "+move.toString());
                 this.solutionIndex++;
                 cube.rotate(move);
                 cubePanel.repaint();
@@ -69,7 +67,6 @@ public class UpperDisplay extends JPanel {
             
         });
         this.previousButton = controlComponents.createButton("Previous", 56, (event)->{
-            System.out.println("Previous");
             Cube cube = cubePanel.getCube();
             
             if(this.solutionIndex > 0){
@@ -79,9 +76,6 @@ public class UpperDisplay extends JPanel {
                 List<Move> solutionList = this.solution.getMoveList();
                 Move prevMove = (Move)solutionList.toArray()[this.solutionIndex];
                 Move inverse = prevMove.getInverse();
-                System.out.println(prevMove.toString());
-                System.out.println(inverse.toString());
-                System.out.println("Solution index "+ this.solutionIndex);
                 cube.rotate(inverse);
                 cubePanel.setCube(cube);
                 cubePanel.repaint();
