@@ -60,7 +60,6 @@ public class UpperDisplay extends JPanel {
                 Move move = (Move)solutionList.toArray()[this.solutionIndex];
                 this.solutionIndex++;
                 cube.rotate(move);
-                cubePanel.repaint();
                 cubePanel.setCube(cube);
             }
             
@@ -78,7 +77,6 @@ public class UpperDisplay extends JPanel {
                 Move inverse = prevMove.getInverse();
                 cube.rotate(inverse);
                 cubePanel.setCube(cube);
-                cubePanel.repaint();
             }
         });
 

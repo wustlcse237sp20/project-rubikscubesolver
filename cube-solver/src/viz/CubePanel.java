@@ -2,6 +2,7 @@ package viz;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 import cube.*;
 
 
@@ -27,17 +28,54 @@ public class CubePanel extends JPanel {
 	public CubePanel(Cube cube){
 		super();
 		this.cube = cube;
-		this.faceletSize = calculateFaceletSize(this.cube.getSize());
+		this.faceletSize = calculateFaceletSize(this.cube.getSize());		
+		this.requestFocus();
+		this.addKeyListener(this.keyListener);
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent event) {
+				updateCubePanel();
+			}
+		 });
+
 	}
 
 	public Cube getCube(){
+		this.requestFocus();
+		this.repaint();
 		return new Cube(this.cube);
 	}
 
 	public void setCube(Cube cube){
 		this.cube = new Cube(cube);
 		this.faceletSize = calculateFaceletSize(this.cube.getSize());
+		this.requestFocus();
+		this.repaint();
 	}
+
+	private KeyListener keyListener = new KeyAdapter() {
+		@Override
+		public void keyTyped(KeyEvent event) {
+			char input = event.getKeyChar();
+			int charType = Character.getType(input);
+			String moveString = "";
+			if (charType == Character.UPPERCASE_LETTER) {
+				moveString = input + "\'";
+			} else {
+				moveString = (input + "").toUpperCase();
+			}
+			if(Move.isValidMove(moveString, cube.getSize())){
+				Move move = new Move(moveString);
+				cube.rotate(move);
+				repaint();
+			}
+			
+		}
+	 };
+
+	 private void updateCubePanel(){
+		this.requestFocus();
+	 }
 
 	/**
 	 * Returns the size of the optimal facelet size for the cube panel.

@@ -1,9 +1,9 @@
 package viz;
 
 import java.awt.*;
-import javax.swing.*;
 import java.net.URL;
-
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import cube.*;
 import viz.*;
 

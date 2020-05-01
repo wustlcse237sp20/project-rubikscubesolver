@@ -47,9 +47,9 @@ public class Cube {
 	public Cube(Cube toCopy) {
 		this.size = toCopy.size;
 		this.displayLocation = toCopy.displayLocation;	
-		this.cube = new Facelet[6][9];
+		this.cube = new Facelet[6][this.size*this.size];
 		for(int faceInt = 0; faceInt < 6; ++faceInt) {
-			for(int faceletInt = 0; faceletInt < 9; ++faceletInt) {
+			for(int faceletInt = 0; faceletInt < this.size*this.size; ++faceletInt) {
 				this.cube[faceInt][faceletInt] = new Facelet(toCopy.cube[faceInt][faceletInt]);
 			}
 		}
@@ -92,7 +92,6 @@ public class Cube {
 	public void rotate(Move move) {
 		
 		if(move.isCubeRotation()) {
-			//TODO perform cube rotation
 			if(move.counterClockwise) {
 				rotateCubeCounterClockwise(move.getFace());
 				if(move.isDoubleRotation()) {
@@ -395,13 +394,6 @@ public class Cube {
 		
 		int[] adjacentFaces = getAdjacentFaces(face);
 		
-//		System.out.print("Move: "+FACES[face]);
-//		System.out.println();
-//		for(int f: adjacentFaces) {
-//			System.out.print(FACES[f] + " ");
-//		}
-//		System.out.println();
-		
 		switch(FACES[face]){
 			case 'U':
 				//[012]
@@ -446,7 +438,6 @@ public class Cube {
 			case 'F':
 				//[678]		[036]	[012]	[258]
 				//U=last row, R=col0, D=row0, L=last col
-				//TODO Front Counter-Clockwise
 				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
 					
 					//[R9 R6 R3] [D9 D8 D7] [L7 L4 L1] [U1 U2 U3]
