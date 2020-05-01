@@ -245,13 +245,7 @@ public class Cube {
 	private void rotateLayersClockwise(int face, int layerCount, int startLayer) {
 		
 		int[] adjacentFaces = getAdjacentFaces(face);
-
-//		System.out.print("Move: "+FACES[face]);
-//		System.out.println();
-//		for(int f: adjacentFaces) {
-//			System.out.print(FACES[f] + " ");
-//		}
-//		System.out.println();
+		
 		switch(FACES[face]){
 			case 'U':
 				//[012]

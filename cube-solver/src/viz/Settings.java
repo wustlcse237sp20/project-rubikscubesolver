@@ -18,11 +18,11 @@ public class Settings {
 
     private JPanel settingsPanel;    
     private final int WIDTH = 192;
-    private final int HEIGHT = 768;
+    private final int HEIGHT = 816;
     private JPanel solvePanel;
 
     
-    public Settings(CubePanel cubePanel, UpperDisplay upperDisplay) {
+    public Settings(CubePanel cubePanel, UpperDisplay upperDisplay, LowerControls lowerControls) {
         //init  panel
         this.settingsPanel = new JPanel();
         this.settingsPanel.setBackground(Color.WHITE);
@@ -55,6 +55,7 @@ public class Settings {
                     solvePanel.setVisible(cubeSize == 3);
                     Cube newCube = new Cube(cubeSize);
                     cubePanel.setCube(newCube);
+                    lowerControls.updateLowerControls(cubePanel);
                 }
             }
             

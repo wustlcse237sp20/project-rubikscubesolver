@@ -41,16 +41,22 @@ public class CubePanel extends JPanel {
 	}
 
 	public Cube getCube(){
-		this.requestFocus();
-		this.repaint();
+		this.updateCubePanel();
 		return new Cube(this.cube);
 	}
 
 	public void setCube(Cube cube){
 		this.cube = new Cube(cube);
 		this.faceletSize = calculateFaceletSize(this.cube.getSize());
-		this.requestFocus();
-		this.repaint();
+		this.updateCubePanel();
+	}
+
+	public void applyMove(String moveString){
+		if(Move.isValidMove(moveString, cube.getSize())){
+			Move move = new Move(moveString);
+			cube.rotate(move);
+			this.updateCubePanel();
+		}
 	}
 
 	private KeyListener keyListener = new KeyAdapter() {
@@ -64,16 +70,13 @@ public class CubePanel extends JPanel {
 			} else {
 				moveString = (input + "").toUpperCase();
 			}
-			if(Move.isValidMove(moveString, cube.getSize())){
-				Move move = new Move(moveString);
-				cube.rotate(move);
-				repaint();
-			}
+			applyMove(moveString);
 			
 		}
 	 };
 
-	 private void updateCubePanel(){
+	 public void updateCubePanel(){
+		this.repaint();
 		this.requestFocus();
 	 }
 
