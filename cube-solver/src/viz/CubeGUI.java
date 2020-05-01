@@ -1,9 +1,9 @@
 package viz;
 
 import java.awt.*;
-import javax.swing.*;
 import java.net.URL;
-
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import cube.*;
 import viz.*;
 
@@ -46,8 +46,8 @@ public class CubeGUI extends JFrame{
 
 		//create panel for settings, display, and controls
 		UpperDisplay upperDisplay = new UpperDisplay(cubeArea);
-		LowerControls lowerControls = new LowerControls();
-		Settings settings = new Settings(cubeArea, upperDisplay);
+		LowerControls lowerControls = new LowerControls(cubeArea);
+		Settings settings = new Settings(cubeArea, upperDisplay, lowerControls);
 
 		mainArea.add(upperDisplay.getPanel(), BorderLayout.NORTH);
 		mainArea.add(cubeArea, BorderLayout.CENTER);
@@ -61,7 +61,7 @@ public class CubeGUI extends JFrame{
 		this.add(mainPanel);
 		
         // Size this JFrame 
-        this.setSize(1024,768);
+        this.setSize(1024,816);
        
         // Make this JFrame visible
 		this.setVisible(true);

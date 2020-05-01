@@ -47,23 +47,37 @@ public class Move {
 	public Move getInverse(){
 		String moveString = this.toString();
 		if(moveString.contains("'")){
-			Move inv = new Move(moveString.substring(0, moveString.length()-1));
-			return inv;
+			Move inverse = new Move(moveString.substring(0, moveString.length()-1));
+			return inverse;
 		}
 		else{
 			if(moveString.length() == 2){
 				return this;
 			}
 			else{
-				Move inv = new Move(moveString.concat("\'"));
-				return inv;
+				Move inverse = new Move(moveString.concat("\'"));
+				return inverse;
 			}
 		}
 	}
 
 	private boolean checkValidMove(String move) {
-		return checkFaceTurn(move) | checkMiddleTurn(move) | checkCubeRotation(move) | checkInnerTurn(move)
-				| checkWideTurn(move);
+		if(checkFaceTurn(move)){
+			return true;
+		}
+		if(checkMiddleTurn(move)){
+			return true;
+		}
+		if(checkCubeRotation(move)){
+			return true;
+		}
+		if(checkInnerTurn(move)){
+			return true;
+		}
+		if(checkWideTurn(move)){
+			return true;
+		}
+		return false;
 	}
 
 	private boolean checkFaceTurn(String move) {
@@ -233,6 +247,24 @@ public class Move {
 
 	}
 
+	public static List<Move> getSimpleCubeMoves(int cubeSize){
+		List<Move> validMoves = new LinkedList<Move>();
+		String faces = "URFDLB";
+		for(char move : faces.toCharArray()){
+			validMoves.add(new Move(move+""));
+			validMoves.add(new Move(move+"\'"));
+		}
+		if(cubeSize >= 4){
+			for(int turnCount=2; turnCount<=cubeSize/2; turnCount++){
+				for(char move : faces.toCharArray()){
+					validMoves.add(new Move(turnCount+""+move+"w"));
+					validMoves.add(new Move(turnCount+""+move+"w\'"));
+				}
+			}
+		}
+		return validMoves;
+	}
+
 	public static List<Move> getValidCubeMoves(int cubeSize){
 		List<Move> validMoves = new LinkedList<Move>();
 		String faces = "URFDLB";
@@ -243,7 +275,7 @@ public class Move {
 			validMoves.add(new Move(move+"\'"));
 		}
 		if(cubeSize >= 4){
-			for(int turnCount=2; turnCount<=(int)Math.ceil(cubeSize/2.0); turnCount++){
+			for(int turnCount=2; turnCount<=cubeSize/2.0; turnCount++){
 				for(char move : faces.toCharArray()){
 					validMoves.add(new Move(turnCount+""+move+"w"));
 					validMoves.add(new Move(turnCount+""+move+"w\'"));

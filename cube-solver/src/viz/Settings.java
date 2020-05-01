@@ -18,10 +18,11 @@ public class Settings {
 
     private JPanel settingsPanel;    
     private final int WIDTH = 192;
-    private final int HEIGHT = 768;
+    private final int HEIGHT = 816;
+    private JPanel solvePanel;
 
     
-    public Settings(CubePanel cubePanel, UpperDisplay upperDisplay) {
+    public Settings(CubePanel cubePanel, UpperDisplay upperDisplay, LowerControls lowerControls) {
         //init  panel
         this.settingsPanel = new JPanel();
         this.settingsPanel.setBackground(Color.WHITE);
@@ -38,9 +39,10 @@ public class Settings {
         box.add(components.createPanelButton("   Reset   ", 64, (event) -> {
             this.resetCube(cubePanel, upperDisplay);
         }));
-        box.add(components.createPanelButton("   Solve   ", 64, (event) -> {
+        solvePanel = components.createPanelButton("   Solve   ", 64, (event) -> {
             this.solveCube(cubePanel, upperDisplay);
-        }));
+        });
+        box.add(solvePanel);
         box.add(components.createLabel(" Select Cube Size ", 18, Font.PLAIN));
      
         box.add(components.createComboBox(createCubeChoices(2,7), cubePanel.getCube().getSize()-2,
@@ -50,16 +52,16 @@ public class Settings {
                     upperDisplay.hideButtons();
                     upperDisplay.setDisplayMessage("", "");
                     int cubeSize = selectedIndex+2;
+                    solvePanel.setVisible(cubeSize == 3);
                     Cube newCube = new Cube(cubeSize);
                     cubePanel.setCube(newCube);
-                    cubePanel.repaint();
+                    lowerControls.updateLowerControls(cubePanel);
                 }
             }
             
         ));
-
-        
         this.settingsPanel.add(box);
+        cubePanel.requestFocus();
     }
 
     public JPanel getPanel(){
@@ -87,10 +89,8 @@ public class Settings {
             scramble.generateScramble(cubeSize, 20);
             newCube.applyAlgorithm(scramble);
         }
-        cubePanel.setCube(newCube);
         upperDisplay.setDisplayMessage("Scramble: ", scramble.toString());
-        cubePanel.repaint();
-        
+        cubePanel.setCube(newCube);
     }
 
     private void resetCube(CubePanel cubePanel, UpperDisplay upperDisplay){
@@ -99,7 +99,6 @@ public class Settings {
         int cubeSize = cubePanel.getCube().getSize();
         Cube newCube = new Cube(cubeSize);
         cubePanel.setCube(newCube);
-        cubePanel.repaint();
     }
 
     private void solveCube(CubePanel cubePanel, UpperDisplay upperDisplay){
@@ -109,6 +108,7 @@ public class Settings {
         upperDisplay.setSolution(solution);
         upperDisplay.showButtons();
         upperDisplay.setDisplayMessage("Solution: ", solution.toString());
+        cubePanel.requestFocus();
     }
 
 
