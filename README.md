@@ -2,6 +2,25 @@
 
 Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 
+## Iteration 3
+
+**User stories completed this iteration**
+* A user should be able to easily execute and run the program via an executable jar file.
+* A user should be able to use keyboard keys to rotate the cube.
+* A user should be able to click buttons in the GUI to rotate the cube.
+* A user should be able to click a button to run a solving algorithm on the current cube
+* A user should be able to iterate through the solution provided by an algorithm by clicking next and previous buttons in the GUI
+
+**Usage**
+* Note - the algorithm may take a while for cubes scrambled more than 5ish rotations.
+
+
+**Is there anything that you implemented that doesn't currently work?**
+* No, everything is functional
+
+**Future work**
+* 
+
 ## Usage
 To use the program run the CubeExplorer.java file located in src/viz/ folder. We used eclipse for this project so feel free to import into eclipse or your IDE of choice.
 
