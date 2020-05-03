@@ -12,7 +12,7 @@ Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 * A user should be able to iterate through the solution provided by an algorithm by clicking next and previous buttons in the GUI
 
 **Usage**
-* Note - the algorithm may take a while for cubes scrambled more than 5ish rotations.
+* Note - the algorithm may take awhile for cubes scrambled more than 5ish rotations.
 
 
 **Is there anything that you implemented that doesn't currently work?**
