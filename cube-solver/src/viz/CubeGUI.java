@@ -34,7 +34,7 @@ public class CubeGUI extends JFrame{
 			this.setIconImage(icon);
 
         } catch (Exception exception) {
-            System.out.println("Error loading icon: " + exception.getMessage());
+//            System.out.println("Error loading icon: " + exception.getMessage());
         } 
 	  
 		//create main panel
