@@ -12,14 +12,14 @@ Group Members: Brad Hodkinson, Prat Bishnupuri, Joe Frazier
 * A user should be able to iterate through the solution provided by an algorithm by clicking next and previous buttons in the GUI
 
 **Usage**
-* Note - the algorithm may take a while for cubes scrambled more than 5ish rotations.
+* Note - the algorithm may take awhile for cubes scrambled more than 5ish rotations.
 
 
 **Is there anything that you implemented that doesn't currently work?**
 * No, everything is functional
 
 **Future work**
-* 
+* If we were to continue to work on this in the future we would look into developing an AI/ML solving algorithm. Additionally, we would try to have a way for theuser to use the cube as a 3d model rather than the flat 2d model currently.
 
 ## Usage
 To use the program run the CubeExplorer.java file located in src/viz/ folder. We used eclipse for this project so feel free to import into eclipse or your IDE of choice.
@@ -66,6 +66,16 @@ The target audience for this project is any cube solver or computer scientist th
 The key features of this project is having a NxN interactive Rubiks cube represented in Java code. The cube will be able to be visualized both in the terminal as well as a Java Graphical User Interface(GUI). The software can generate a scramble for a NxN cube, and in the future we might also build a solving algorithm.
 ## UI
 The user interface will display a 6 sided Rubik's cube in a flat form with colors in the GUI and labels in the terminal. The user will be able to perform moves through the terminal and the GUI. Below is a screenshot of what the Rubik's cube will look like when printed to the terminal.
+
+Sample GUI View:
+<p>
+    <img align="center" src="cube-solver/src/viz/assets/solve_example.png" height="400">
+</p>
+<br>
+<p>
+    <img align="center" src="cube-solver/src/viz/assets/big_cube_example.png" height="400">
+</p>
+<br>
 
 Sample Terminal View:
 ```
