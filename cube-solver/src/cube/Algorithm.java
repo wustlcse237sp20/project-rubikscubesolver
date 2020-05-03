@@ -155,6 +155,7 @@ public class Algorithm {
 		stringBuilder.append(generateRandomNotationPostfix(random));
 		return stringBuilder.toString();
 	}
+
 	private String generateRandomCubeRotation(Random random) {
 		String[] cubeRotations = new String[] {"x","y", "z"};
 		StringBuilder stringBuilder = new StringBuilder();
@@ -163,6 +164,7 @@ public class Algorithm {
 		return stringBuilder.toString();
 		
 	}
+
 	private String generateRandomInnerMove(Random random) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(FACES.charAt(random.nextInt(FACES.length())));
@@ -170,6 +172,7 @@ public class Algorithm {
 		
 		return stringBuilder.toString().toLowerCase();
 	}
+
 	private String generateRandomWideMove(Random random, int cubeSize) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(random.nextInt((cubeSize/2)-1)+2);
@@ -187,6 +190,9 @@ public class Algorithm {
 		return postfixNotaionList[random.nextInt(postfixNotaionList.length)];
 	}
 	
+	/**
+	 * Converting the cube to a terminal output
+	 */
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		for(Move move : moveList) {

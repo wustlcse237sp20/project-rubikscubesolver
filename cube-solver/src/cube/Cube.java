@@ -9,7 +9,7 @@ public class Cube {
 	//6 faces of the cube: Up, Right, Front, Down, Back, Left
 	final char[] FACES = new char[] {'U','R', 'F', 'D', 'L', 'B'};
 	//6 colors of the cube
-	Color[] colors = new Color[] {Color.WHITE, Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.ORANGE};
+	CubeColor[] colors = new CubeColor[] {CubeColor.WHITE, CubeColor.BLUE, CubeColor.RED, CubeColor.YELLOW, CubeColor.GREEN, CubeColor.ORANGE};
 	
 		
 	int size;
@@ -41,37 +41,28 @@ public class Cube {
 	
 	/**
 	 * Public deep copy constructor
-	 * @param a cube to copy
+	 * @param toCopy cube to copy
 	 */
 	public Cube(Cube toCopy) {
 		this.size = toCopy.size;
 		this.displayLocation = toCopy.displayLocation;	
-		this.cube = new Facelet[6][9];
+		this.cube = new Facelet[6][this.size*this.size];
 		for(int faceInt = 0; faceInt < 6; ++faceInt) {
-			for(int faceletInt = 0; faceletInt < 9; ++faceletInt) {
+			for(int faceletInt = 0; faceletInt < this.size*this.size; ++faceletInt) {
 				this.cube[faceInt][faceletInt] = new Facelet(toCopy.cube[faceInt][faceletInt]);
 			}
 		}
 	}
 	
-//	protected Object clone() throws CloneNotSupportedException {
-//	    Cube cloned = (Cube)super.clone();
-//	    cloned.setFacelets((Facelet)cloned.getFacelets().clone());   
-//	    return cloned;
-//	}
 	
-	
-	
-	
-	
-	/*
+	/**
 	 * Method to check if the cube is solved
 	 * @return true if the cube is solved, else false
 	 */
 	public boolean isSolved() {
 		//check if all the colors on the cube are the same
 		for(Facelet[] face : this.cube) {
-			Color firstColor = face[0].getColor();
+			CubeColor firstColor = face[0].getColor();
 			for(int i=1; i<face.length; i++) {
 				if(face[i].getColor() != firstColor) {
 					return false;
@@ -86,6 +77,11 @@ public class Cube {
 		return this.size;
 	}
 	
+	/**
+	 * Solves the cube face by applying the 
+	 * solving algorithm to the whole cube
+	 * @param Algorithm to be applied
+	 */
 	public void applyAlgorithm(Algorithm algorithm) {
 		//for each move in the algorithm, rotate the cube accordingly
 		for(Move move: algorithm.moveList) {
@@ -93,14 +89,13 @@ public class Cube {
 		}
 	}
 	
-	/*
+	/**
 	 * rotate the cube given a move
 	 * @param move to rotate move
 	 */
 	public void rotate(Move move) {
 		
 		if(move.isCubeRotation()) {
-			//TODO perform cube rotation
 			if(move.counterClockwise) {
 				rotateCubeCounterClockwise(move.getFace());
 				if(move.isDoubleRotation()) {
@@ -200,12 +195,9 @@ public class Cube {
 			Facelet[] faceletCol = getCol(face, row);
 			for(int col=0; col<this.size; col++) {
 				result[row*this.size+col] = faceletCol[this.size-col-1];
-//				cube[face][row*this.size+col] = faceletCol[this.size-col-1];
 			}
 		}
 		cube[face] = result;
-		
-//		return result;
 	}
 	
 	/*
@@ -242,7 +234,7 @@ public class Cube {
 		return this.cube;
 	}
 	
-	/*
+	/**
 	 * Get a list of Facelets for a face
 	 * @param face
 	 * @return array of Facelets
@@ -251,16 +243,9 @@ public class Cube {
 		return this.cube[face];
 	}
 	
-	private void rotateLayersClockwise(int face, int layerCount, int startLayer) {
-		
+	private void rotateLayersClockwise(int face, int layerCount, int startLayer) {	
 		int[] adjacentFaces = getAdjacentFaces(face);
-
-//		System.out.print("Move: "+FACES[face]);
-//		System.out.println();
-//		for(int f: adjacentFaces) {
-//			System.out.print(FACES[f] + " ");
-//		}
-//		System.out.println();
+		
 		switch(FACES[face]){
 			case 'U':
 				//[012]
@@ -400,15 +385,7 @@ public class Cube {
 	}
 	
 	private void rotateLayersCounterClockwise(int face, int layerCount, int startLayer) {
-		
 		int[] adjacentFaces = getAdjacentFaces(face);
-		
-//		System.out.print("Move: "+FACES[face]);
-//		System.out.println();
-//		for(int f: adjacentFaces) {
-//			System.out.print(FACES[f] + " ");
-//		}
-//		System.out.println();
 		
 		switch(FACES[face]){
 			case 'U':
@@ -454,7 +431,6 @@ public class Cube {
 			case 'F':
 				//[678]		[036]	[012]	[258]
 				//U=last row, R=col0, D=row0, L=last col
-				//TODO Front Counter-Clockwise
 				for(int layer=startLayer; layer<startLayer+layerCount; layer++) {
 					
 					//[R9 R6 R3] [D9 D8 D7] [L7 L4 L1] [U1 U2 U3]
@@ -576,7 +552,7 @@ public class Cube {
 		return result;
 	}
 	
-	/*
+	/**
 	 * Get a list of Facelets for a column of a face
 	 * @param face
 	 * @param col
@@ -590,7 +566,7 @@ public class Cube {
 		return result;
 	}
 	
-	/*
+	/**
 	 * Get a list of adjacent faces
 	 * @param face
 	 * @return integer list of adjacent faces
@@ -625,7 +601,7 @@ public class Cube {
 	}
 	
 	
-	/*
+	/**
 	 * Prints out a 2D representation of the cube.
 	 * A 3x3 cube in the solved state would look like the following:
 	 * 

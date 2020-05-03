@@ -1,28 +1,39 @@
 package cube;
 
+
+/**
+ * Class used to represent a face of the cube
+ * @author Brad Hodkinson
+ */
 public class Facelet {
 
-	Color color;
+	CubeColor color;
 	String location;
 	boolean displayLocation;
 	
-	public Facelet(Color color, String location, boolean displayLocation) {
+	/*
+	 * This is the public constructor for a Face of the Cube
+	 */
+	public Facelet(CubeColor color, String location, boolean displayLocation) {
 		this.color = color;
 		this.location = location;
 		this.displayLocation = displayLocation;
 	}
 	
+	/*
+	 * This is another public constructor for a Face of the Cube
+	 */
 	public Facelet(Facelet facelet) {
 		this.color = facelet.color;
 		this.location = facelet.location;
 		this.displayLocation = facelet.displayLocation;
 	}
 	
-	public Color getColor() {
+	public CubeColor getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(CubeColor color) {
 		this.color = color;
 	}
 

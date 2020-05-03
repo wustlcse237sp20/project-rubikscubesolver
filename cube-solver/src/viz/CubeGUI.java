@@ -1,84 +1,76 @@
 package viz;
 
-
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
-import javax.swing.*;
+import java.net.URL;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import cube.*;
+import viz.*;
 
+/**
+ * CubeGUI creates a JFrame and adds all necessary components to the frame.
+ * @author Pratyay Bishnupuri
+ */
 public class CubeGUI extends JFrame{
-	
-	private JButton scrambleButton;
-	private JButton solveButton;
-	private JPanel upperPanel;
-	private Choice sizeChoice;
-	
-	
-	
+
+	public Cube cube; 
+	private final int DEFAULT_CUBE_SIZE = 3;
+
 	public CubeGUI() {
-	    super(" Rubik's Cube GUI ");
+	    super(" Rubik's Cube Explorer ");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setLayout(new BorderLayout());
-	    
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        
-        scrambleButton = new JButton(" Scramble ");
-        solveButton = new JButton(" Solve ");
-        
-        upperPanel = new JPanel();
-    	upperPanel.setLayout(new BorderLayout());
-    	
-    	
-    	//add option for game bored size
-    	sizeChoice = new Choice();
-    	sizeChoice.add(" 2 x 2 ");
-    	sizeChoice.add(" 3 x 3 ");
-    	sizeChoice.add(" 4 x 4 ");
-    	sizeChoice.add(" 5 x 5 ");
-    	sizeChoice.add(" 6 x 6 ");
-    	sizeChoice.add(" 7 x 7 ");
-    	
-    	upperPanel.add(sizeChoice, BorderLayout.NORTH);
-    	upperPanel.add(scrambleButton, BorderLayout.CENTER);
-    	upperPanel.add(solveButton, BorderLayout.SOUTH);
+		this.setLayout(new BorderLayout());
+		
+		//create cube 
+		this.cube = new Cube(DEFAULT_CUBE_SIZE);
 
-    	//add action listeners 
-    	scrambleButton.addActionListener(new scrambleButtonListener());
-    	solveButton.addActionListener(new solveButtonListener());
- 
-        
-        
+        //Set GUI dock icon
+        try {
+			final Toolkit toolkit = Toolkit.getDefaultToolkit();
+			final URL imageUrl = this.getClass().getClassLoader().getResource("cube.png");
+			final Image icon = toolkit.getImage(imageUrl);
+			final Taskbar taskbar = Taskbar.getTaskbar();
+
+            //sets icon for mac
+			taskbar.setIconImage(icon);
+
+			//set icon for windows
+			this.setIconImage(icon);
+
+        } catch (Exception exception) {
+//            System.out.println("Error loading icon: " + exception.getMessage());
+        } 
+	  
+		//create main panel
+        JPanel mainPanel = new JPanel(new BorderLayout());
+		
+		//create panel for cube and controls
+		JPanel mainArea = new JPanel(new BorderLayout());
+		CubePanel cubeArea = new CubePanel(cube);
+
+		//create panel for settings, display, and controls
+		UpperDisplay upperDisplay = new UpperDisplay(cubeArea);
+		LowerControls lowerControls = new LowerControls(cubeArea);
+		Settings settings = new Settings(cubeArea, upperDisplay, lowerControls);
+
+		mainArea.add(upperDisplay.getPanel(), BorderLayout.NORTH);
+		mainArea.add(cubeArea, BorderLayout.CENTER);
+		mainArea.add(lowerControls.getPanel(), BorderLayout.SOUTH);
+
+
     	// Add the panel to this JFrame
-    	mainPanel.add(upperPanel, BorderLayout.NORTH);
-        this.add(mainPanel);
+		mainPanel.add(settings.getPanel(), BorderLayout.WEST);
+		mainPanel.add(mainArea);
 
+		this.add(mainPanel);
+		
         // Size this JFrame 
-        this.setSize(800,400);
+        this.setSize(1024,816);
        
         // Make this JFrame visible
-        this.setVisible(true);
+		this.setVisible(true);
+		
 	}
-	
-	private class scrambleButtonListener implements ActionListener {
 
-        public void actionPerformed(ActionEvent e) {
-        	System.out.println("Scramble");
-        }
-    }
-	
-	private class solveButtonListener implements ActionListener {
-
-        public void actionPerformed(ActionEvent e) {
-        	System.out.println("Solve");
-        }
-    }
-
-	public static void main(String[] args) {
-		new CubeGUI();
-	}
-	
-	
 }
 
