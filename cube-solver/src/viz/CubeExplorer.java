@@ -8,17 +8,17 @@ import cube.Move;
 
 public class CubeExplorer {
 
-	public static void main(String[] args) {
+	// public static void main(String[] args) {
 		
-		Scanner keyBoard = new Scanner(System.in);
-		int cubeSize = getUsersCubeSize(keyBoard);
+	// 	Scanner keyBoard = new Scanner(System.in);
+	// 	int cubeSize = getUsersCubeSize(keyBoard);
 		
-		Cube cube = new Cube(cubeSize);
-		displayCubeUsageMessage();
-		System.out.println(cube);
-		startExplorer(cube);
+	// 	Cube cube = new Cube(cubeSize);
+	// 	displayCubeUsageMessage();
+	// 	System.out.println(cube);
+	// 	startExplorer(cube);
 
-	}
+	// }
 
 	
 	
