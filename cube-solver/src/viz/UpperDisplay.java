@@ -7,9 +7,12 @@ import java.awt.event.*;
 import javax.swing.*;
 import cube.*;
 
-
-
-
+/**
+ * This creates the upperDisplay for the GUI. 
+ * Creates the Solve, Scramble, and Reset buttons.
+ * As well as the next and previous buttons for the 3x3 cube
+ * @author Brad Hodkinson
+ */
 public class UpperDisplay extends JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -120,9 +123,4 @@ public class UpperDisplay extends JPanel {
         this.solution = algorithm;
         this.solutionIndex = 0;
     }
-
-
-    
-
-
 }

@@ -6,22 +6,12 @@ import cube.Algorithm;
 import cube.Cube;
 import cube.Move;
 
+/**
+ * Used to run the CubeSolver through terminal
+ * @author Brad Hodkinson
+ */
 public class CubeExplorer {
 
-	// public static void main(String[] args) {
-		
-	// 	Scanner keyBoard = new Scanner(System.in);
-	// 	int cubeSize = getUsersCubeSize(keyBoard);
-		
-	// 	Cube cube = new Cube(cubeSize);
-	// 	displayCubeUsageMessage();
-	// 	System.out.println(cube);
-	// 	startExplorer(cube);
-
-	// }
-
-	
-	
 	private static void displayCubeUsageMessage() {
 		System.out.println("\nType \"scramble\" to mix the cube up");
 		System.out.println("Type \"solve\" to solve the cube");
@@ -39,8 +29,6 @@ public class CubeExplorer {
 		}
 		System.out.println();
 	}
-	
-	
 	
 	private static int getUsersCubeSize(Scanner keyBoard ) {
 		String input = "";
@@ -145,8 +133,4 @@ public class CubeExplorer {
 		}
 		return cubeChanged;
 	}
-	
-	
-	
-
 }

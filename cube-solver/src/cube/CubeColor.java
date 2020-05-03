@@ -1,14 +1,9 @@
 package cube;
 
-//public enum Color {
-//    WHITE,
-//    BLUE,
-//    RED,
-//    GREEN,
-//    ORANGE,
-//    YELLOW;
-//}
 
+/** 
+ * Enums to represent the colors of the cubes 
+ */
 public enum CubeColor {
     WHITE {
         public String toString() {

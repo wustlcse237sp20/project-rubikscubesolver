@@ -7,7 +7,10 @@ import java.awt.GridLayout;
 import javax.swing.*;
 import cube.*;
 
-
+/**
+ * Adds all the move buttons to the CubeGUI 
+ * @author Brad Hodkinson
+ */
 public class LowerControls extends JPanel {
 
     private static final long serialVersionUID = 1L;
@@ -22,6 +25,10 @@ public class LowerControls extends JPanel {
     final char[] FACES = new char[] {'U','R', 'F', 'D', 'L', 'B'};
     final char[] MOVE_NOTATION = new char[]{' ', '\''};
 
+    /**
+     * Constructor for the lower controls
+     * @param cubePanel
+     */
     public LowerControls(CubePanel cubePanel){
         this.lowerControlsPanel = new JPanel();
 
@@ -34,6 +41,12 @@ public class LowerControls extends JPanel {
         this.updateLowerControls(cubePanel);
     }
 
+    /**
+     * Updates the control buttons depending on the size of the cube.
+     * For example, 3x3 has only the first row of control buttons, while 4x4, 5x5... 
+     * have more control buttons. 
+     * @param cubePanel
+     */
     public void updateLowerControls(CubePanel cubePanel){
         this.lowerControlsPanel.removeAll();
         Components controlComponents = new Components(96, this.backgroundColor);

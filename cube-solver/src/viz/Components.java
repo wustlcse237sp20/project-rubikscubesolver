@@ -6,7 +6,10 @@ import java.awt.event.*;
 import javax.swing.*;
 import util.*;
 
-
+/**
+ * Creates any components of the GUI
+ * @author Brad Hodkinson
+ */
 public class Components {
 
     private final String FONT_NAME = "Helvetica Neue";
@@ -18,6 +21,12 @@ public class Components {
         this.backgroundColor = backgroundColor;
     }
 
+    /**
+     * Used for creating a component of a panel, with specified component
+     * @param compoent
+     * @param height
+     * @return JPanel
+     */
     public JPanel createPanelComponet(Component component, int height){
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(this.width, height));
@@ -26,6 +35,13 @@ public class Components {
         return panel;
     }
 
+    /**
+     * Used for creating buttons using the label of the button, 
+     * the height of the button and the action to perform on buttonPress
+     * @param label
+     * @param height
+     * @return JButton
+     */
     public JButton createButton(String label, int height, ActionListener action){
         JButton button = new JButton(label);
         button.setFont(new Font(this.FONT_NAME, Font.PLAIN, 18));
@@ -36,11 +52,24 @@ public class Components {
         return button;
     }
 
+    /**
+     * Uses create button and create panel component methods to create panel with button
+     * @param label
+     * @param height
+     * @param action
+     * @return JPanel
+     */
     public JPanel createPanelButton(String label, int height, ActionListener action){
         JButton button = createButton(label, height, action);
         return createPanelComponet(button, height);
     }
 
+    /**
+     * Creates a button and adds it to a panel
+     * @param label
+     * @param height
+     * @return JPanel
+     */
     private JLabel createJLabel(String text, int fontSize, int fontType){
         JLabel label = new JLabel(text, SwingConstants.CENTER);
         Font font = new Font(this.FONT_NAME, fontType, fontSize);
@@ -48,12 +77,27 @@ public class Components {
         return label;
     }
 
+    /**
+     * Creates and label and adds it to a panel
+     * @param text
+     * @param fontSize
+     * @param fontType
+     * @return JPanel
+     */
     public JPanel createLabel(String text, int fontSize, int fontType){
         JLabel label = createJLabel(text, fontSize, fontType);
         int height = (int)(fontSize*1.6);
         return createPanelComponet(label, height);
     }
 
+
+    /**
+     * Creates a detail label and adds it to a panel
+     * @param boldText
+     * @param text
+     * @param fontSize
+     * @return JPanel
+     */
     public JPanel createDetailLabel(String boldText, String text, int fontSize){
         JPanel panel = new JPanel();
         panel.add(createJLabel(boldText, fontSize, Font.BOLD));
@@ -64,6 +108,13 @@ public class Components {
         return panel;
     }
 
+    /**
+     * creates a dropdown menu and adds it to a panel
+     * @param validChoices
+     * @param defaultChoice
+     * @param action
+     * @return JPanel
+     */
     public JPanel createComboBox(List<String> validChoices, int defaultChoice, Consumer<Integer> action){
         JComboBox comboBox = new JComboBox(validChoices.toArray());
         comboBox.setFont(new Font("Airal", Font.PLAIN, 18));

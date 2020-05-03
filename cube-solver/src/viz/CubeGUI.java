@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 import cube.*;
 import viz.*;
 
+/**
+ * CubeGUI creates a JFrame and adds all necessary components to the frame.
+ * @author Pratyay Bishnupuri
+ */
 public class CubeGUI extends JFrame{
 
 	public Cube cube; 

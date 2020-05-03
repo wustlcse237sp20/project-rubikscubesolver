@@ -9,9 +9,7 @@ import util.*;
 import solver.*;
 
 /**
- * 
  * Creates the settings panel for the cube solver GUI
- * 
  * @author Brad Hodkinson
  */
 public class Settings {
@@ -117,5 +115,4 @@ public class Settings {
         Cube newCube = new Cube(cubeSize);
         cubePanel.setCube(newCube);
     }
-
 }
