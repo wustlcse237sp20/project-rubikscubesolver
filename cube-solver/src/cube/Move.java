@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * Class to represent moves on a NxNxN cube
- * 
  * @author Brad Hodkinson
  */
 public class Move {
@@ -33,6 +32,10 @@ public class Move {
 
 	static int layerCount;
 
+	/**
+	 * This is the constructor for the move class
+	 * @param String move
+	 */
 	public Move(String move) {
 		// Remove leading and trailing spaces
 		move = move.strip();
@@ -208,7 +211,6 @@ public class Move {
 	 * @return true if move is valid, else false
 	 */
 	public boolean isValidMove(String move) {
-
 		return move.matches(FACE_TURN_NOTATION) | move.matches(MIDDLE_TURN_NOTATION)
 				| move.matches(CUBE_ROTATION_NOTATION) | move.matches(INNER_SLICE_NOTATION)
 				| move.matches(WIDE_TURN_NOTATION);
@@ -222,9 +224,7 @@ public class Move {
 	 * https://www.worldcubeassociation.org/regulations/#article-12-notation
 	 * 
 	 * @param move string to check
-	 * 
-	 * @param cubeSize to check if the move is possible given the cube size
-	 * 
+	 * @param cubeSize to check if the move is possible given the cube size=
 	 * @return true if move is valid, else false
 	 */
 	public static boolean isValidMove(String move, int cubeSize) {

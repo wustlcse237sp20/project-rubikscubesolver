@@ -5,7 +5,12 @@ import javax.swing.*;
 import java.awt.event.*;
 import cube.*;
 
-
+/**
+ * CubePanel implementation of JPanel that extends and
+ * rewrites the paintDisplay method. Rather than drwaing a Panel,
+ * it draws a cube using Graphics
+ * @author Pratyay Bishnupuri
+ */
 public class CubePanel extends JPanel {
 
 	private static final long serialVersionUID = 5834042018320178484L;
@@ -13,7 +18,7 @@ public class CubePanel extends JPanel {
 	private Cube cube;
 	private int faceletSize;
 
-    /*
+    /**
 	 * RGB defined colors of Rubik's Cube
 	 */
     Color[] rubiksColors = new Color[] {
@@ -25,6 +30,10 @@ public class CubePanel extends JPanel {
 		new Color(255, 88, 0) //orange
 	};
 
+	/**
+	 * Constructor method of the CubePanel
+	 * @param cube
+	 */
 	public CubePanel(Cube cube){
 		super();
 		this.cube = cube;
@@ -51,6 +60,10 @@ public class CubePanel extends JPanel {
 		this.updateCubePanel();
 	}
 
+	/**
+	 * Takes in a string move and applies the move to the drawing of the cube
+	 * @param moveString
+	 */
 	public void applyMove(String moveString){
 		if(Move.isValidMove(moveString, cube.getSize())){
 			Move move = new Move(moveString);
@@ -118,7 +131,7 @@ public class CubePanel extends JPanel {
 		}
 	}
 
-    /*
+    /**
 	 * This method is needed to draw something on JPanel other than drawing the background color.
      * 
      * Implements the paintComponent of a JPanel class.

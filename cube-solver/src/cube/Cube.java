@@ -2,7 +2,6 @@ package cube;
 
 /**
  * Class to a NxNxN cube
- * 
  * @author Brad Hodkinson
  */
 public class Cube {
@@ -56,7 +55,7 @@ public class Cube {
 	}
 	
 	
-	/*
+	/**
 	 * Method to check if the cube is solved
 	 * @return true if the cube is solved, else false
 	 */
@@ -78,6 +77,11 @@ public class Cube {
 		return this.size;
 	}
 	
+	/**
+	 * Solves the cube face by applying the 
+	 * solving algorithm to the whole cube
+	 * @param Algorithm to be applied
+	 */
 	public void applyAlgorithm(Algorithm algorithm) {
 		//for each move in the algorithm, rotate the cube accordingly
 		for(Move move: algorithm.moveList) {
@@ -85,7 +89,7 @@ public class Cube {
 		}
 	}
 	
-	/*
+	/**
 	 * rotate the cube given a move
 	 * @param move to rotate move
 	 */
@@ -191,12 +195,9 @@ public class Cube {
 			Facelet[] faceletCol = getCol(face, row);
 			for(int col=0; col<this.size; col++) {
 				result[row*this.size+col] = faceletCol[this.size-col-1];
-//				cube[face][row*this.size+col] = faceletCol[this.size-col-1];
 			}
 		}
 		cube[face] = result;
-		
-//		return result;
 	}
 	
 	/*
@@ -233,7 +234,7 @@ public class Cube {
 		return this.cube;
 	}
 	
-	/*
+	/**
 	 * Get a list of Facelets for a face
 	 * @param face
 	 * @return array of Facelets
@@ -242,8 +243,7 @@ public class Cube {
 		return this.cube[face];
 	}
 	
-	private void rotateLayersClockwise(int face, int layerCount, int startLayer) {
-		
+	private void rotateLayersClockwise(int face, int layerCount, int startLayer) {	
 		int[] adjacentFaces = getAdjacentFaces(face);
 		
 		switch(FACES[face]){
@@ -385,7 +385,6 @@ public class Cube {
 	}
 	
 	private void rotateLayersCounterClockwise(int face, int layerCount, int startLayer) {
-		
 		int[] adjacentFaces = getAdjacentFaces(face);
 		
 		switch(FACES[face]){
@@ -553,7 +552,7 @@ public class Cube {
 		return result;
 	}
 	
-	/*
+	/**
 	 * Get a list of Facelets for a column of a face
 	 * @param face
 	 * @param col
@@ -567,7 +566,7 @@ public class Cube {
 		return result;
 	}
 	
-	/*
+	/**
 	 * Get a list of adjacent faces
 	 * @param face
 	 * @return integer list of adjacent faces
@@ -602,7 +601,7 @@ public class Cube {
 	}
 	
 	
-	/*
+	/**
 	 * Prints out a 2D representation of the cube.
 	 * A 3x3 cube in the solved state would look like the following:
 	 * 

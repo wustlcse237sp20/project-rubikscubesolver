@@ -65,5 +65,4 @@ public class Phase1Solver implements PhaseStrategy {
 		int randomInt = random.nextInt(moves.length);
 		return new Move(moves[randomInt].toString());
 	}
-	
 }

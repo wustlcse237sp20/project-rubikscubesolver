@@ -39,6 +39,4 @@ public class Min2Phase implements SolverStrategy {
 			original.addToMoveList(m);
 		}
 	}
-	
-	
 }

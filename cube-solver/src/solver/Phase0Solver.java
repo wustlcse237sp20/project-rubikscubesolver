@@ -9,7 +9,6 @@ import cube.Cube;
 /**
  * Class defining the 0 phase of the modified Min2Phase algorithm
  * @author Joe Frazier
- *
  */
 public class Phase0Solver implements PhaseStrategy {
 	
